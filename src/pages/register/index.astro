@@ -1,0 +1,65 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout>
+  <main class="flex flex-col justify-center items-center w-full h-screen bg-back sm:gap-20 caret-transparent">
+    <a href="/" class="fixed top-10 left-10">
+      <svg
+        class="w-8 h-8 hover:scale-105 transition active:scale-95 hover:text-secondary">
+        <use href="/assets/icons/back.svg"></use>
+      </svg>
+    </a>
+
+    <a href="/login"
+      class="fixed top-10 right-10 flex flex-row justify-center items-center gap-1 hover:scale-105 transition active:scale-95 hover:text-secondary">
+      <p class="text-xl font-medium">Login</p>
+      <svg class="w-8 h-8">
+        <use href="/assets/icons/go.svg"></use>
+      </svg>
+    </a>
+
+    <h1 class="text-text font-extrabold text-7xl">Vaultly</h1>
+
+    <div class="w-[90%] sm:w-[70%] lg:w-[1000px] h-auto flex flex-col justify-center items-center sm:flex-row bg-dark-back rounded-4xl">
+      <div class="bg-dark-back w-full h-full sm:w-[50%] rounded-l-4xl flex flex-col justify-center items-start p-10 gap-5">
+        <h2 class="text-4xl font-bold text-text text-balance">
+          Regístrate hoy y comienza a dominar tus finanzas.
+        </h2>
+        <p
+          class="text-secondary-text text-balance font-sans font-medium text-xl">
+          Organiza, analiza y crece.
+        </p>
+      </div>
+      <div
+        class="bg-primary w-full h-full sm:w-[50%] rounded-tl-[70px] rounded-bl-[90px] rounded-r-4xl flex flex-col justify-around items-center">
+        <form class="flex flex-col gap-6 w-full p-15">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="myemail@example.com"/>
+          <label for="password">Password</label>
+          <input
+            type="password"
+            name="email"
+            id="email"
+            placeholder="Your password"/>
+          <input
+            type="password"
+            name="email"
+            id="email"
+            placeholder="Confirm your password"/>
+          <a href="" class="text-white/80 text-lg hover:text-white/100">¿olvido su contraseña?</a>
+          <button
+            type="submit"
+            class="bg-accent text-text font-bold py-3 rounded-full hover:bg-accent/80 transition">
+            Crear cuenta
+          </button>
+          <a href="/login" class="text-white/80 text-[16px] hover:text-white/100 text-center">¿Iniciar Sesión?</a>
+        </form>
+      </div>
+    </div>
+  </main>
+</Layout>

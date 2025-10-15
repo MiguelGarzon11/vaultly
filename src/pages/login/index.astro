@@ -1,0 +1,41 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout>
+    <main class="bg-dark-back w-full h-screen flex justify-center items-center caret-transparent">
+        <h1 class="fixed top-10 font-extrabold text-7xl text-primary">Vaultly</h1>
+        <a href="/" class="fixed top-10 left-10">
+            <svg class="w-8 h-8 hover:scale-105 transition active:scale-95 hover:text-secondary">
+                <use href="/assets/icons/back.svg"></use>
+            </svg>
+        </a>
+
+        <a href="/register" class="fixed top-10 right-10 flex flex-row justify-center items-center gap-1 hover:scale-105 transition active:scale-95 hover:text-secondary">
+            <p class="text-xl font-medium">Register</p>
+            <svg class="w-8 h-8">
+                <use href="/assets/icons/go.svg"></use>
+            </svg>
+        </a>
+        <div class="bg-back w-[90%] h-auto sm:w-[70%] lg:w-[600px] rounded-2xl p-10">
+            <h2 class="text-center sm:text-3xl text-text font-bold py-5">Iniciar sesión</h2>
+            <p class="text-secondary-text text-xl text-center">Bienvenido de nuevo a tu espacio financiero seguro.</p>
+            <form class="flex flex-col justify-center items-center w-full p-10 gap-5">
+                <input type="email" name="email" id="login" placeholder="myemail@example.com" />
+                <input type="password" name="password" id="login" placeholder="Your password" />
+                <a href="" class="text-start w-full text-primary/80 hover:text-primary/100">¿Olvido su contraseña?</a>
+                <button>Ingresar</button>
+            </form>
+            <div class="flex flex-row gap-2 justify-center items-center w-full">
+                <p>¿Ya tiene cuenta?</p>
+                <a href="/register">
+                    <span class="text-lg text-primary/80 hover:text-primary/100">Registrarse</span>
+                </a>
+            </div>
+            
+
+        </div>
+
+    </main>
+
+</Layout>
