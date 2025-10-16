@@ -3,16 +3,20 @@ import Layout from "../../layouts/Layout.astro";
 ---
 
 <Layout>
-    <main class="bg-dark-back w-full h-screen flex justify-center items-center caret-transparent">
-        <h1 class="fixed top-10 font-extrabold text-7xl text-primary">Vaultly</h1>
+    <main class="bg-dark-back w-full h-screen flex flex-col justify-center items-center caret-transparent gap-10">
+        <div class="flex flex-row justify-center items-center gap-5">
+            <img src="/assets/icons/icon.svg" alt="Vaultly Logo" class="w-20" />
+            <h1 class="font-extrabold text-7xl text-text">Vaultly</h1>
+        </div>
+        
         <a href="/" class="fixed top-10 left-10">
             <svg class="w-8 h-8 hover:scale-105 transition active:scale-95 hover:text-secondary">
                 <use href="/assets/icons/back.svg"></use>
             </svg>
         </a>
 
-        <a href="/register" class="fixed top-10 right-10 flex flex-row justify-center items-center gap-1 hover:scale-105 transition active:scale-95 hover:text-secondary">
-            <p class="text-xl font-medium">Register</p>
+        <a href="/register" class="fixed top-10 right-10 flex flex-row justify-center items-center gap-2 hover:scale-105 transition active:scale-95 hover:text-secondary">
+            <p class="text-xl font-medium">Registrarse</p>
             <svg class="w-8 h-8">
                 <use href="/assets/icons/go.svg"></use>
             </svg>

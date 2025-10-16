@@ -3,7 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 ---
 
 <Layout>
-  <main class="flex flex-col justify-center items-center w-full h-screen bg-back sm:gap-20 caret-transparent">
+  <main class="flex flex-col justify-center items-center w-full h-screen bg-back sm:gap-10 caret-transparent">
     <a href="/" class="fixed top-10 left-10">
       <svg
         class="w-8 h-8 hover:scale-105 transition active:scale-95 hover:text-secondary">
@@ -12,14 +12,18 @@ import Layout from "../../layouts/Layout.astro";
     </a>
 
     <a href="/login"
-      class="fixed top-10 right-10 flex flex-row justify-center items-center gap-1 hover:scale-105 transition active:scale-95 hover:text-secondary">
-      <p class="text-xl font-medium">Login</p>
+      class="fixed top-10 right-10 flex flex-row justify-center items-center gap-2 hover:scale-105 transition active:scale-95 hover:text-secondary">
+      <p class="text-xl font-medium">Iniciar sesión</p>
       <svg class="w-8 h-8">
         <use href="/assets/icons/go.svg"></use>
       </svg>
     </a>
 
-    <h1 class="text-text font-extrabold text-7xl">Vaultly</h1>
+    <div class="flex flex-row justify-center items-center gap-5">
+      <img src="/assets/icons/icon.svg" alt="Vaultly Logo" class="w-20" />
+      <h1 class="text-text font-extrabold text-7xl">Vaultly</h1>
+    </div>
+    
 
     <div class="w-[90%] sm:w-[70%] lg:w-[1000px] h-auto flex flex-col justify-center items-center sm:flex-row bg-dark-back rounded-4xl">
       <div class="bg-dark-back w-full h-full sm:w-[50%] rounded-l-4xl flex flex-col justify-center items-start p-10 gap-5">
