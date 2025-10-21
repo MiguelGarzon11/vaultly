@@ -1,11 +1,16 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import Dasheader from "../../sections/Dasheader.astro";
+import { SideBarService } from "../../services/sidebarService";
+import SidebarWrapper from "../../components/Sidebarwrapper";
+
+const sidebar = new SideBarService();
+const isOpen = sidebar.getIsOpen();
 ---
 
-<Layout>
-    <Dasheader></Dasheader>
-    <main class="bg-black"> 
-        
-    </main>
+<Layout title="Dashboard">
+  <main
+    class="flex flex-row h-full w-full gap-[1.5%] justify-start bg-back caret-transparent"
+  >
+    <SidebarWrapper client:load />
+  </main>
 </Layout>

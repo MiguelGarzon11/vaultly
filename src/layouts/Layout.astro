@@ -1,10 +1,16 @@
+---
+import { ClientRouter } from "astro:transitions";
+const { title } = Astro.props;
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Vaultly</title>
+    <title>{title ? `${title}` : "Vaultly"}</title>
+    <ClientRouter />
   </head>
   <body>
     <slot />
