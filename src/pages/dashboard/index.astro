@@ -1,16 +1,28 @@
 ---
-import Layout from "../../layouts/Layout.astro";
 import { SideBarService } from "../../services/sidebarService";
-import SidebarWrapper from "../../components/Sidebarwrapper";
+import DashboardLayout from "../../layouts/DashboardLayout.astro";
+import Card from "../../components/card.astro";
 
 const sidebar = new SideBarService();
-const isOpen = sidebar.getIsOpen();
 ---
 
-<Layout title="Dashboard">
-  <main
-    class="flex flex-row h-full w-full gap-[1.5%] justify-start bg-back caret-transparent"
-  >
-    <SidebarWrapper client:load />
-  </main>
-</Layout>
+<DashboardLayout title="Dashboard">
+  <div class="flex flex-col gap-5">
+    <h1 class="text-text text-5xl font-medium">Dashboard</h1>
+    <p class="text-secondary-text text-2xl font-extralight">
+      Bienvenido a tu panel de control financiero
+    </p>
+    <div class="grid grid-cols-2 grid-rows-2 gap-5">
+      <Card
+        redirect="dashboard/presupuesto"
+        titulo="Balance total"
+        icono="wallet"
+        value="2,000.000"
+        subvalor="+12.5% vs mes anterior"
+      />
+      <Card />
+      <Card />
+      <Card />
+    </div>
+  </div>
+</DashboardLayout>
