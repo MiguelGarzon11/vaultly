@@ -1,8 +1,8 @@
 ---
-const {icono, text} = Astro.props
+const {icono, texto} = Astro.props
 ---
 
-<div class="flex flex-row gap-3">
+<div class="flex flex-row gap-3 rounded-full w-auto px-5 justify-center items-center bg-linear-100 from-primary/20 to-secondary/20 text-primary text-lg py-3 ring-primary/50 ring-1">
     <img src={"assets/icons/" + icono + ".svg"} alt="icono" class="w-8 h-8" />
-    <p>{text}</p>
+    <p>{texto}</p>
 </div>
