@@ -1,8 +1,8 @@
 ---
-import { server } from "../../actions/server";
+import { actions } from "../../actions";
 import Layout from "../../layouts/Layout.astro";
 
-const action = server.register;
+const action = actions.register;
 ---
 
 <Layout title="Register">

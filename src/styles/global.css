@@ -16,7 +16,7 @@ hr {
 }
 
 input {
-  @apply h-10 w-full px-3 py-2 bg-back rounded-xl enabled:border-rose-400 focus:border-0 border-none outline-none ring-primary focus:ring-2 focus:outline-none caret-secondary-text;
+  @apply h-10 w-full px-3 py-3 bg-back rounded-xl enabled:border-rose-400 focus:border-0 border-none outline-none ring-primary focus:ring-2 focus:outline-none caret-secondary-text;
 }
 
 label {
@@ -37,4 +37,8 @@ label {
 
 #dIcon {
   @apply w-6 h-6;
+}
+
+button {
+  @apply bg-secondary active:scale-95 w-full h-auto px-6 py-4 text-xl text-white font-medium hover:bg-secondary/90 rounded-full cursor-pointer transition-all duration-300;
 }
