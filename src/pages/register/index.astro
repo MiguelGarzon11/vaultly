@@ -1,15 +1,19 @@
 ---
+import { server } from "../../actions/server";
 import Layout from "../../layouts/Layout.astro";
+
+const action = server.register;
 ---
 
 <Layout title="Register">
   <main
     class="flex flex-col justify-center items-center w-full h-screen bg-back sm:gap-10 caret-transparent"
   >
-    <a href="/" class="fixed top-10 left-10 flex flex-row justify-center items-center gap-2 hover:scale-105 transition active:scale-95 hover:text-secondary">
-      <svg
-        class="w-8 h-8"
-      >
+    <a
+      href="/"
+      class="fixed top-10 left-10 flex flex-row justify-center items-center gap-2 hover:scale-105 transition active:scale-95 hover:text-secondary"
+    >
+      <svg class="w-8 h-8">
         <use href="/assets/icons/back.svg"></use>
       </svg>
       <p class="text-xl font-medium">Inicio</p>
@@ -51,26 +55,33 @@ import Layout from "../../layouts/Layout.astro";
       <div
         class="bg-primary w-full h-full sm:w-[50%] rounded-tl-[70px] rounded-bl-[90px] rounded-r-4xl flex flex-col justify-around items-center"
       >
-        <form class="flex flex-col gap-6 w-full p-15">
+        <form
+          method="post"
+          action={action}
+          class="flex flex-col gap-6 w-full p-15"
+        >
           <label for="email">Email</label>
           <input
             type="email"
             name="email"
             id="email"
             placeholder="myemail@example.com"
+            required
           />
           <label for="password">Password</label>
           <input
             type="password"
-            name="email"
-            id="email"
+            name="pass"
+            id="pass"
             placeholder="Your password"
+            required
           />
           <input
             type="password"
-            name="email"
-            id="email"
+            name="cPass"
+            id="cPass"
             placeholder="Confirm your password"
+            required
           />
           <a href="" class="text-white/80 text-lg hover:text-white/100"
             >¿olvido su contraseña?</a

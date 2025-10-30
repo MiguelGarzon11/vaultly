@@ -11,21 +11,26 @@ export default function SideBar({ isOpen }: Props) {
       className={clsx(
         "inset-0 h-full bg-primary flex flex-col caret-transparent transition-all duration-200",
         isOpen
-          ? "w-[70%] md:w-[24%] lg:w-[20%] rounded-r-4xl py-6 sm:py-10 px-6 sm:px-8"
+          ? "w-[70%] md:w-[24%] lg:w-[25%] rounded-r-4xl py-6 sm:py-10 px-6 sm:px-8"
           : "w-[10%] sm:w-[8%] lg:w-[5%] rounded-r-2xl sm:py-3 sm:p-1 md:py-3 lg:py-5 justify-center"
       )}
     >
-      <div className={clsx("items-center justify-start gap-x-1 sm:gap-x-2 lg:gap-x-0 xl:gap-x-5",
-        isOpen ? "grid grid-cols-2 mb-4 sm:mb-6 lg:mb-10" : "grid grid-cols-1 justify-center mb-4"
-      )}>
+      <div
+        className={clsx(
+          "w-full h-auto grid items-center",
+          isOpen
+            ? "grid-cols-2 grid-rows-2 items-center"
+            : "grid-cols-1 grid-rows-2 mb-4"
+        )}
+      >
         <img
           src="/assets/icons/iconwhite.svg"
           alt="Vaultly Logo"
           className={clsx(
             "transition-all duration-200",
             isOpen
-              ? "row-span-2 h-10 w-10 sm:h-12 sm:w-12 md:w-16 md:h-16 lg:w-18 lg:h-18 justify-center"
-              : "flex row-span-2 h-10 w-10 md:h-12 md:w-12 justify-center items-center"
+              ? "row-span-2 h-10 w-10 sm:h-12 sm:w-12 md:w-16 md:h-16 lg:w-18 lg:h-18"
+              : "flex-1 row-span-2 h-10 w-10 md:h-12 md:w-12 justify-center items-center"
           )}
         />
         {isOpen && (
