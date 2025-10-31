@@ -1,39 +1,47 @@
 import { defineAction } from "astro:actions";
 import { z } from "zod";
 
-export const actions = {
+export const server = {
     register: defineAction({
-        accept: 'form',
+        accept: "form",
         input: z.object({
-            email: z.string().email(),
-            password: z.string().min(8),
-            cPassword: z.string().min(8),
+            email: z.string().email("Email no válido"),
+            password: z.string().min(6, "La contraseña debe tener al menos 8 caracteres"),
+            cPassword: z.string().min(6),
+        }).refine(data => data.password === data.cPassword, {
+            message: "Las contraseñas no coinciden",
+            path: ["cPassword"],
         }),
-        handler: async ({ email, password, cPassword }) => {
-            try {
-                if (password !== cPassword) {
-                    return { success: false, message: "Las contraseñas no coinciden" };
-                }
 
-                const response = await fetch("http://localhost:4321/api/auth/register", {
+        async handler(input) {
+            try {
+                const res = await fetch("http://localhost:4321/api/auth/register", {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ email, password }),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        email: input.email,
+                        password: input.password,
+                    }),
                 });
 
-                const data = await response.json();
+                const data = await res.json();
 
-                if (data.success) {
-                    return {
-                        success: true,
-                        message: "Revisa tu correo por el código de confirmación"
-                    }
+                if (!res.ok) {
+                    throw new Error(data.error || "Error al registrar usuario");
+                }
+
+                return {
+                    ok: true,
+                    message: data.message,
                 };
 
-                return { success: false, message: data.message || "Error al registrar" };
             } catch (error) {
-                console.error("Error en la action de register: ", error);
-                return { success: false, message: "Error en el servidor" };
+                return {
+                    ok: false,
+                    message: "Error al registrar usuario",
+                };
             }
         }
     }),
@@ -44,28 +52,32 @@ export const actions = {
             email: z.string().email(),
             password: z.string().min(6),
         }),
-        handler: async ({email, password}) => {
+        async handler(input) {
             try {
-                const response = await fetch("http://localhost:4321/api/auth/login", {
+                const res = await fetch('http://localhost:4321/api/auth/login', {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({email, password}),
+                    body: JSON.stringify({
+                        email: input.email,
+                        password: input.password
+                    }),
                 });
 
-                const data = await response.json();
+                const data = await res.json();
 
-                if (data.success) {
-                    return {
-                        success: true,
-                        message: "Inicio de sesión exitoso"
-                    }
+                if (!res.ok) {
+                    throw new Error(data.error || "Error al registrar usuario");
+                }
+
+                return {
+                    ok: true,
+                    message: data.message,
                 };
-
-                return { success: false, message: data.message || "Error al iniciar sesión" };
-            } catch (error) {
-                console.error("Error en la action de login: ", error);
-                return { success: false, message: "Error en el servidor" };
+            } catch {
+                return {
+                    ok: false,
+                    message: "Error al registrar usuario",
+                };
             }
         }
     })
-};
+}

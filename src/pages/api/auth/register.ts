@@ -1,30 +1,29 @@
 import type { APIRoute } from "astro";
-import { CognitoIdentityProviderClient, SignUpCommand } from "@aws-sdk/client-cognito-identity-provider";
-
-const client = new CognitoIdentityProviderClient({
-    region: import.meta.env.AWS_REGION,
-});
+import { register } from "../../../services/cognitoService";
 
 export const POST: APIRoute = async ({ request }) => {
-    try {
-        const { email, password } = await request.json();
+    const body = await request.json();
+    const { email, password } = body;
 
-        const command = new SignUpCommand({
-            ClientId: import.meta.env.COGNITO_CLIENT_ID,
-            Username: email,
-            Password: password,
-        });
-
-        const result = await client.send(command);
-
-        return new Response(JSON.stringify({ success: true, data: result }), {
-            status: 200,
-        });
-    } catch (error: any) {
-        console.error("Error al registrar en Cognito:", error);
+    if (!email || !password) {
         return new Response(
-            JSON.stringify({ success: false, message: error.message || "Error en Cognito" }),
+            JSON.stringify({ ok: false, message: "Email and password are required." }),
+            { status: 400 }
+        );
+    }
+
+    const result = await register(email, password);
+
+    if (result.success) {
+        return new Response(
+            JSON.stringify({ ok: true, message: "User registered successfully." }),
+            { status: 200 }
+        );
+    } else {
+        return new Response(
+            JSON.stringify({ ok: false, message: "Error registering user." }),
             { status: 500 }
         );
     }
-};
+
+}
