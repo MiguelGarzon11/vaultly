@@ -1,5 +1,46 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+
+const inputs = Array.from({ length: 6 });
 ---
 
-<Layout />
+<Layout title="Confirmar cuenta">
+  <main class="w-full h-screen flex justify-center items-center bg-dark-back">
+    <section
+      class="w-auto px-15 py-10 h-auto bg-back rounded-t-3xl rounded-b-4xl"
+    >
+      <div
+        class="flex flex-col gap-5 w-full h-full justify-center items-center"
+      >
+        <img src="/assets/icons/icon.svg" class="w-20 h-20 mb-8" />
+        <h1 class="text-4xl font-bold">Verifica tu correo</h1>
+        <p
+          class="text-xl font-extralight text-secondary-text text-center w-[70%]"
+        >
+          Hemos enviado un código de 6 dígitos a tu correo electrónico
+        </p>
+        <form class="flex gap-3 mb-10">
+          {inputs.map((_, i) => <input type="text" id="code" maxlength="1" />)}
+        </form>
+        <button id="button">Verificar Código</button>
+        <p class="text-secondary-text">¿No recibiste el código?</p>
+        <button class="text-primary/80 font-medium hover:text-primary"
+          >Reenviar codigo</button
+        >
+        <hr class="w-full my-5" />
+        <a href="/register">
+          <div
+            class="flex flex-row gap-2 justify-center items-center opacity-85 hover:opacity-100"
+          >
+            <img
+              src="/assets/icons/arrowleft.svg"
+              alt="icono volver"
+              class="w-6 h-6"
+            />
+            <p class="text-secondary-text">Volver al registro</p>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>
