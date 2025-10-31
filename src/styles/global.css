@@ -39,6 +39,14 @@ label {
   @apply w-6 h-6;
 }
 
+#button {
+  @apply bg-secondary active:scale-95 w-full h-auto px-6 py-4 text-xl text-white font-medium hover:bg-secondary/90 rounded-4xl cursor-pointer transition-all duration-300;
+}
+
 button {
-  @apply bg-secondary active:scale-95 w-full h-auto px-6 py-4 text-xl text-white font-medium hover:bg-secondary/90 rounded-full cursor-pointer transition-all duration-300;
+  @apply cursor-pointer;
+}
+
+#code {
+  @apply w-12 h-18 ring-1 ring-text/20 text-4xl focus:ring-secondary focus:ring-2 font-bold text-text text-center bg-dark-back/20;
 }
