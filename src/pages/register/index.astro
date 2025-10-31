@@ -1,8 +1,5 @@
 ---
-import { actions } from "../../actions";
 import Layout from "../../layouts/Layout.astro";
-
-const action = actions.register;
 ---
 
 <Layout title="Register">
@@ -55,11 +52,7 @@ const action = actions.register;
       <div
         class="bg-primary w-full h-full sm:w-[50%] rounded-tl-[70px] rounded-bl-[90px] rounded-r-4xl flex flex-col justify-around items-center"
       >
-        <form
-          method="post"
-          action={action}
-          class="flex flex-col gap-6 w-full p-15"
-        >
+        <form class="flex flex-col gap-6 w-full p-15">
           <label for="email">Email</label>
           <input
             type="email"
@@ -71,14 +64,14 @@ const action = actions.register;
           <label for="password">Password</label>
           <input
             type="password"
-            name="pass"
+            name="password"
             id="pass"
             placeholder="Your password"
             required
           />
           <input
             type="password"
-            name="cPass"
+            name="cPassword"
             id="cPass"
             placeholder="Confirm your password"
             required
@@ -102,3 +95,17 @@ const action = actions.register;
     </div>
   </main>
 </Layout>
+
+<script>
+  import { actions } from "astro:actions";
+  import { navigate } from "astro:transitions/client";
+
+  const form = document.querySelector("form");
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const formData = new FormData(form);
+    const { error } = await actions.register(formData);
+
+    if (!error) navigate("/register/confirmcode");
+  });
+</script>
