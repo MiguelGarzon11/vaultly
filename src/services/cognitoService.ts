@@ -1,4 +1,4 @@
-import { CognitoIdentityProviderClient, AdminInitiateAuthCommand, SignUpCommand, AuthFlowType } from "@aws-sdk/client-cognito-identity-provider";
+import { CognitoIdentityProviderClient, AdminInitiateAuthCommand, SignUpCommand, AuthFlowType, ConfirmSignUpCommand } from "@aws-sdk/client-cognito-identity-provider";
 
 const client = new CognitoIdentityProviderClient({
     region: import.meta.env.AWS_REGION,
@@ -53,4 +53,18 @@ export async function logout() { }
 
 export async function forwardPasswordReset() { }
 
-export async function confirmCode() { }
+export async function confirmCode(username: string, code: string) { 
+    try {
+        const command = new ConfirmSignUpCommand({
+            ClientId: import.meta.env.COGNITO_CLIENT_ID,
+            Username: username,
+            ConfirmationCode: code,
+        });
+
+        const response = await client.send(command)
+        return {success: true, message: response}
+    } catch (error) {
+        console.error("Error confirmando código:", error);
+        return { success: false, message: error}
+    }
+}
