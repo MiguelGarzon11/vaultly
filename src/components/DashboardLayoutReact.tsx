@@ -15,7 +15,7 @@ export default function DashboardLayout({ children }: Props) {
   };
 
   return (
-    <main className="h-full w-full flex flex-row bg-dark-back/60 items-start caret-transparent">
+    <main className="h-screen w-full flex flex-row bg-dark-back/60 items-start caret-transparent">
       <SideBar isOpen={isOpen} />
       <div className="flex flex-col w-full h-full">
         <Dasheader isOpen={isOpen} toggleSidebar={toggleSidebar} />

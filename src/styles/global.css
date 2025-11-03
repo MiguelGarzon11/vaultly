@@ -40,7 +40,7 @@ label {
 }
 
 #button {
-  @apply bg-secondary active:scale-95 w-full h-auto px-6 py-4 text-xl text-white font-medium hover:bg-secondary/90 rounded-4xl cursor-pointer transition-all duration-300;
+  @apply bg-secondary active:scale-95 w-full h-auto px-5 py-3 sm:px-6 sm:py-4 text-lg sm:text-xl text-white font-medium hover:bg-secondary/90 rounded-4xl cursor-pointer transition-all duration-300;
 }
 
 button {

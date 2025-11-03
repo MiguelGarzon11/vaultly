@@ -4,41 +4,44 @@ import Layout from "../../layouts/Layout.astro";
 
 <Layout title="Register">
   <main
-    class="flex flex-col justify-center items-center w-full h-screen bg-back sm:gap-10 caret-transparent"
+    class="flex flex-col justify-center items-center w-full h-auto bg-back sm:gap-10 caret-transparent py-26"
   >
-    <a
-      href="/"
-      class="fixed top-10 left-10 flex flex-row justify-center items-center gap-2 hover:scale-105 transition active:scale-95 hover:text-secondary"
-    >
-      <svg class="w-8 h-8">
-        <use href="/assets/icons/back.svg"></use>
-      </svg>
-      <p class="text-xl font-medium">Inicio</p>
-    </a>
+    <div class="fixed inset-0 bg-back/80 backdrop-blur-sm z-50 w-full h-20 rounded-b-4xl">
+      <a
+        href="/"
+        class="absolute left-6 top-7 sm:top-10 sm:left-10 flex flex-row justify-center items-center gap-2 hover:scale-105 transition active:scale-95 hover:text-secondary active:text-secondary"
+      >
+        <svg class="w-6 h-6 sm:w-8 sm:h-8">
+          <use href="/assets/icons/back.svg"></use>
+        </svg>
+        <p class="text-lg sm:text-xl font-medium">Inicio</p>
+      </a>
 
-    <a
-      href="/login"
-      class="fixed top-10 right-10 flex flex-row justify-center items-center gap-2 hover:scale-105 transition active:scale-95 hover:text-secondary"
-    >
-      <p class="text-xl font-medium">Iniciar sesión</p>
-      <svg class="w-8 h-8">
-        <use href="/assets/icons/go.svg"></use>
-      </svg>
-    </a>
-
-    <div
-      class="flex flex-row justify-center items-center gap-5"
-      transition:name="vaultly"
-    >
-      <img src="/assets/icons/icon.svg" alt="Vaultly Logo" class="w-20" transition:name="logo"/>
-      <h1 class="text-text font-extrabold text-7xl">Vaultly</h1>
+      <a
+        href="/login"
+        class="absolute right-6 top-7 sm:top-10 sm:right-10 flex flex-row justify-center items-center gap-2 hover:scale-105 transition active:scale-95 hover:text-secondary active:text-secondary"
+      >
+        <p class="text-lg sm:text-xl font-medium">Iniciar sesión</p>
+        <svg class="w-6 h-6 sm:w-8 sm:h-8">
+          <use href="/assets/icons/go.svg"></use>
+        </svg>
+      </a>
+      <hr class="fixed w-full text-text top-20 sm:hidden"/>
     </div>
 
     <div
-      class="w-[90%] sm:w-[70%] lg:w-[1000px] h-auto flex flex-col justify-center items-center sm:flex-row bg-dark-back rounded-4xl"
+      class="flex flex-row justify-center items-center gap-4 sm:gap-5 mb-10"
+      transition:name="vaultly"
+    >
+      <img src="/assets/icons/icon.svg" alt="Vaultly Logo" class="w-16 h-16 sm:w-20 sm:h-20"/>
+      <h1 class="text-text font-extrabold text-5xl sm:text-7xl">Vaultly</h1>
+    </div>
+
+    <div
+      class="w-[90%] sm:w-[70%] lg:w-[1000px] h-auto flex flex-col justify-center items-center sm:flex-row bg-dark-back rounded-tl-4xl rounded-tr-4xl rounded-bl-[90px] rounded-br-4xl overflow-hidden"
     >
       <div
-        class="bg-dark-back w-full h-full sm:w-[50%] rounded-l-4xl flex flex-col justify-center items-start p-16 gap-5"
+        class="bg-dark-back w-full h-full sm:w-[50%] sm:rounded-l-4xl flex flex-col justify-center items-start p-16 gap-5"
       >
         <h2 class="text-4xl font-bold text-text text-balance">
           Regístrate hoy y comienza a dominar tus finanzas.
@@ -50,9 +53,9 @@ import Layout from "../../layouts/Layout.astro";
         </p>
       </div>
       <div
-        class="bg-primary w-full h-full sm:w-[50%] rounded-tl-[70px] rounded-bl-[90px] rounded-r-4xl flex flex-col justify-around items-center"
+        class="bg-primary w-full h-full sm:w-[50%] rounded-tl-[70px] rounded-bl-[90px] flex flex-col justify-around items-center"
       >
-        <form class="flex flex-col gap-6 w-full p-15">
+        <form class="flex flex-col gap-4 sm:gap-6 w-full px-12 py-15 sm:p-15">
           <label for="email">Email</label>
           <input
             type="email"
@@ -79,7 +82,7 @@ import Layout from "../../layouts/Layout.astro";
           <a href="" class="text-white/80 text-lg hover:text-white/100"
             >¿olvido su contraseña?</a
           >
-          <button type="submit" id="button"> Crear cuenta </button>
+          <button type="submit" id="button">Crear cuenta</button>
           <a
             href="/login"
             class="text-white/80 text-[16px] hover:text-white/100 text-center"

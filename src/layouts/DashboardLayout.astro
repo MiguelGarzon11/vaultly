@@ -13,12 +13,12 @@ const { title } = Astro.props;
     <title>{title ? `${title}` : "Vaultly"}</title>
     <ClientRouter />
   </head>
-  <body>
+  <body class="w-full h-screen">
     <DashboardLayoutReact client:load>
       <slot />
     </DashboardLayoutReact>
   </body>
-</html>
+</html>j
 
 <style is:global>
   @import "tailwindcss";
