@@ -6,29 +6,36 @@ export const POST: APIRoute = async ({ request }) => {
     const body = await request.json();
     const { email, password } = body;
 
-    if (!email || !password) {
+    if(!email || !password) {
         return new Response(
-            JSON.stringify({ ok: false, message: "Email and password are required." }),
-            { status: 400 }
-        );
+            JSON.stringify({ ok: false, message: "Email and password are required."}),
+            { status: 400, headers: {"Content-Type": "application/json" }}
+        )
     }
 
-    const result = await login(email, password);
+    const result = login(email, password)
 
-    const token = result?.data?.AccessToken;
-
-    if (!token) {
-        console.log(JSON.stringify({ ok: true, message: "User logged in successfully." }));
-    }
-
-    const cookie = `authToken=${token}; Path=/; Max-Age=${60 * 60 * 24};`
-
-    return console.log(JSON.stringify({ ok: true, message: "User logged in successfully.", token: token }),
-        {
-            status: 200,
+    if((await result).message === "El usuario no esta confirmado.") {
+        return new Response(null, {
+            status: 302,
             headers: {
-                "Set-Cookie": cookie,
-                "Content-Type": "application/json",
+                Location: "/register/confirmcode",
             },
+        });
+    }
+
+    if((await result).message === "No existe un usuario con ese correo.") {
+        return new Response(null, {
+            status: 302,
+            headers: {
+                Location: "/register"
+            }
         })
+    }
+
+    return new Response(JSON.stringify({
+        ok: true,
+        message: "Login exitoso"
+    }))
+
 };

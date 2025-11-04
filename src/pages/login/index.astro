@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import Noti from "../../shared/components/noti.astro";
 ---
 
 <Layout title="Login">
@@ -14,7 +15,9 @@ import Layout from "../../layouts/Layout.astro";
       <h1 class="text-text font-extrabold text-5xl sm:text-7xl">Vaultly</h1>
     </div>
 
-    <div class="fixed inset-0 bg-dark-back/80 backdrop-blur-sm z-50 w-full h-20 rounded-b-4xl">
+    <Noti type="success" title="Prueba" message="Esto es una prueba"></Noti>
+
+    <div class="fixed inset-0 bg-dark-back/80 backdrop-blur-sm z-50 sm:bg-transparent sm:backdrop-blur-none w-full h-20 rounded-b-4xl">
       <a
         href="/"
         class="absolute left-6 top-7 sm:top-10 sm:left-10 flex flex-row justify-center items-center gap-2 hover:scale-105 transition active:scale-95 hover:text-secondary active:text-secondary"
@@ -85,8 +88,12 @@ import Layout from "../../layouts/Layout.astro";
   form?.addEventListener("submit", async (event) => {
     event.preventDefault();
     const formData = new FormData(form);
-    const { error } = await actions.login(formData);
+    const res = await actions.login(formData);
 
-    if (!error) navigate("/dashboard");
+    if (!res.data) {
+      navigate("/login")
+      return;
+    }
+
   });
 </script>

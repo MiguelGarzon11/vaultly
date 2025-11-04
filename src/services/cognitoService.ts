@@ -1,4 +1,4 @@
-import { CognitoIdentityProviderClient, AdminInitiateAuthCommand, SignUpCommand, AuthFlowType, ConfirmSignUpCommand } from "@aws-sdk/client-cognito-identity-provider";
+import { CognitoIdentityProviderClient, SignUpCommand, AuthFlowType, ConfirmSignUpCommand, InitiateAuthCommand } from "@aws-sdk/client-cognito-identity-provider";
 
 const client = new CognitoIdentityProviderClient({
     region: import.meta.env.AWS_REGION,
@@ -26,9 +26,8 @@ export async function register(email: string, password: string) {
 export async function login(email: string, password: string) {
 
     const input = {
-        AuthFlow: AuthFlowType.ADMIN_USER_PASSWORD_AUTH,
+        AuthFlow: "USER_PASSWORD_AUTH" as AuthFlowType,
         ClientId: import.meta.env.COGNITO_CLIENT_ID,
-        UserPoolId: import.meta.env.COGNITO_USER_POOL_ID,
         AuthParameters: {
             USERNAME: email,
             PASSWORD: password
@@ -37,21 +36,28 @@ export async function login(email: string, password: string) {
 
 
     try {
-        const command = new AdminInitiateAuthCommand(input);
+        const command = new InitiateAuthCommand(input);
         const response = await client.send(command);
 
-        console.log("Tokens: ", response.AuthenticationResult);
-        return {
-            success: true, data: {
-                AccessToken: response.AuthenticationResult?.AccessToken,
-                IdToken: response.AuthenticationResult?.IdToken,
-                RefreshToken: response.AuthenticationResult?.RefreshToken
-            }
+        return {ok: true, data: response}
+
+    } catch (error: any) {
+        
+
+        if (error.name === "UserNotConfirmedException") {
+            return {ok: false, message: "El usuario no esta confirmado."}
         }
 
-    } catch (error) {
-        return { success: false, error };
-        console.error("Error de autentificación: ", error)
+        if (error.name === "NotAuthorizedException") {
+            return {ok: false, message: "Contraseña incorrecta o usuario inválido."}
+        }
+
+        if (error.name === "UserNotFoundException") {
+            return { ok: false, message: "No existe un usuario con ese correo." };
+        }
+
+        console.error("Error desconocido:", error);
+        return {ok: false, message: "Ocurrió un error al iniciar sesión."}
     }
 }
 

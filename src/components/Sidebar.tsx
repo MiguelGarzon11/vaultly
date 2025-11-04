@@ -9,38 +9,34 @@ export default function SideBar({ isOpen }: Props) {
   return (
     <main
       className={clsx(
-        "inset-0 h-full bg-primary flex flex-col caret-transparent transition-all duration-200",
+        "inset-0 h-[100%] bg-primary flex flex-col caret-transparent transition-all duration-200",
         isOpen
-          ? "w-[70%] md:w-[24%] lg:w-[25%] rounded-r-4xl py-6 sm:py-10 px-6 sm:px-8"
-          : "w-[10%] sm:w-[8%] lg:w-[5%] rounded-r-2xl sm:py-3 sm:p-1 md:py-3 lg:py-5 justify-center"
-      )}
-    >
+          ? "w-[70%] sm:w-[40%] md:w-[35%] lg:w-[25%] rounded-r-4xl py-6 sm:py-10 px-6 sm:px-8"
+          : "w-[10%] sm:w-[8%] md:w-[4%] lg:w-[5%] rounded-r-2xl sm:py-3 sm:p-1 md:py-5 lg:py-5 justify-center"
+      )}>
       <div
-        className={clsx(
-          "w-full h-auto grid items-center",
-          isOpen
-            ? "grid-cols-2 grid-rows-2 items-center"
-            : "grid-cols-1 grid-rows-2 mb-4"
-        )}
-      >
+        className="w-full h-auto flex flex-row sm:gap-5 md:gap-5 mb-4 items-center justify-center px-3">
         <img
           src="/assets/icons/iconwhite.svg"
           alt="Vaultly Logo"
           className={clsx(
             "transition-all duration-200",
             isOpen
-              ? "row-span-2 h-10 w-10 sm:h-12 sm:w-12 md:w-16 md:h-16 lg:w-18 lg:h-18"
-              : "flex-1 row-span-2 h-10 w-10 md:h-12 md:w-12 justify-center items-center"
+              ? "h-10 w-10 sm:h-12 sm:w-12 md:w-14 md:h-14"
+              : "h-10 w-10 md:h-12 md:w-12 lg:w-10 lg:h-10"
+
           )}
         />
         {isOpen && (
           <>
-            <h1 className="col-span-1 text-white text-2xl md:text-xl lg:text-5xl font-extrabold text-balance">
-              Vaultly
-            </h1>
-            <p className="col-span-1 text-dark-back font-light text-[12px] sm:text-sm lg:text-xl text-balance">
-              Finanzas Personales
-            </p>
+            <div className="flex flex-col w-full justify-around">
+              <h1 className="text-white text-2xl md:text-xl lg:text-3xl font-extrabold text-balance">
+                Vaultly
+              </h1>
+              <p className="text-dark-back font-light text-[12px] sm:text-sm text-balance">
+                Finanzas Personales
+              </p>
+            </div>
           </>
         )}
       </div>
