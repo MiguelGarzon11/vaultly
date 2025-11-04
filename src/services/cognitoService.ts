@@ -41,7 +41,13 @@ export async function login(email: string, password: string) {
         const response = await client.send(command);
 
         console.log("Tokens: ", response.AuthenticationResult);
-        return { success: true, data: response.AuthenticationResult }
+        return {
+            success: true, data: {
+                AccessToken: response.AuthenticationResult?.AccessToken,
+                IdToken: response.AuthenticationResult?.IdToken,
+                RefreshToken: response.AuthenticationResult?.RefreshToken
+            }
+        }
 
     } catch (error) {
         return { success: false, error };
@@ -53,7 +59,7 @@ export async function logout() { }
 
 export async function forwardPasswordReset() { }
 
-export async function confirmCode(username: string, code: string) { 
+export async function confirmCode(username: string, code: string) {
     try {
         const command = new ConfirmSignUpCommand({
             ClientId: import.meta.env.COGNITO_CLIENT_ID,
@@ -62,9 +68,9 @@ export async function confirmCode(username: string, code: string) {
         });
 
         const response = await client.send(command)
-        return {success: true, message: response}
+        return { success: true, message: response }
     } catch (error) {
         console.error("Error confirmando código:", error);
-        return { success: false, message: error}
+        return { success: false, message: error }
     }
 }

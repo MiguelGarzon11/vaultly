@@ -1,7 +1,6 @@
 ---
 import DashboardLayout from "../../layouts/DashboardLayout.astro";
 import Card from "../../shared/components/card.astro";
-
 ---
 
 <DashboardLayout title="Dashboard">
@@ -10,7 +9,7 @@ import Card from "../../shared/components/card.astro";
     <p class="text-secondary-text text-2xl font-extralight">
       Bienvenido a tu panel de control financiero
     </p>
-    <div class="grid grid-cols-2 grid-rows-2 gap-5">
+    <div class="grid grid-cols-1 sm:grid-cols-2 grid-rows-2 gap-5">
       <Card
         redirect="dashboard/presupuesto"
         titulo="Balance total"

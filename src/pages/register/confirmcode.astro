@@ -1,7 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import CodeInput from './codeInput';
-
+import CodeInput from "./codeInput";
 ---
 
 <Layout title="Confirmar cuenta">
@@ -12,14 +11,18 @@ import CodeInput from './codeInput';
       <div
         class="flex flex-col gap-5 w-full h-full justify-center items-center"
       >
-        <img src="/assets/icons/icon.svg" class="w-20 h-20 mb-8" transition:name="logo"/>
+        <img
+          src="/assets/icons/icon.svg"
+          class="w-20 h-20 mb-8"
+          transition:name="logo"
+        />
         <h1 class="text-4xl font-bold">Verifica tu correo</h1>
         <p
           class="text-xl font-extralight text-secondary-text text-center w-[70%]"
         >
           Hemos enviado un código de 6 dígitos a tu correo electrónico
         </p>
-        <CodeInput client:load></CodeInput>
+        <CodeInput client:load />
         <button id="button">Verificar Código</button>
         <p class="text-secondary-text">¿No recibiste el código?</p>
         <button class="text-primary/80 font-medium hover:text-primary"
@@ -43,11 +46,4 @@ import CodeInput from './codeInput';
   </main>
 </Layout>
 
-<script>
-  const inputs = document.querySelectorAll('code');
-
-  function onInit() {
-
-  }
-  console.log("Se estan imprimiendo los inputs", inputs);
-</script>
+<script></script>
