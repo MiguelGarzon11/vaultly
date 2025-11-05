@@ -28,10 +28,10 @@ export default function Header() {
               </button>
             </div>
           </div>
-          <a href="/register" className="hidden sm:flex px-5 py-2 w-auto rounded-2xl bg-back text-text ring-1 ring-text/50 hover:bg-secondary hover:text-white hover:ring-0 font-medium text-xl">Registrarse</a>
+          <a href="/register" className="hidden sm:flex px-5 py-2 w-auto rounded-2xl bg-back text-text ring-1 ring-text/50 hover:bg-secondary hover:text-white hover:ring-0 font-medium text-xl active:bg-secondary active:text-white">Registrarse</a>
           {isOpen && (
             <div className="fixed top-[76px] inset-0 bg-back/80 backdrop-blur-sm z-50 w-full h-full py-10 px-5 flex flex-row justify-around items-center gap-5 rounded-b-3xl">
-              <a href="/login" className="px-5 py-2 w-auto rounded-2xl bg-primary text-white hover:bg-back hover:ring-1 hover:text-text hover:ring-text/50 font-medium text-[16px] sm:text-xl">Iniciar Sesión</a>
+              <a href="/login" className="px-5 py-2 w-auto rounded-2xl bg-primary text-white active:bg-back active:ring-1 active:text-text active:ring-text/50 font-medium text-[16px] sm:text-xl">Iniciar Sesión</a>
               <a href="/register" className="px-7 py-2 w-auto rounded-2xl bg-back text-text ring-1 ring-text/50 hover:bg-secondary hover:text-white hover:ring-0 font-medium text-[16px] sm:text-xl">Registrarse</a>
             </div>
           )}
