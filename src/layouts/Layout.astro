@@ -1,7 +1,7 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import  AppProvider from "../components/AppProvider"
 const { title } = Astro.props;
-import { NotificationProvider } from "../shared/components/noti";
 ---
 
 <!doctype html>
@@ -14,9 +14,9 @@ import { NotificationProvider } from "../shared/components/noti";
     <ClientRouter />
   </head>
   <body class="caret-transparent">
-    <NotificationProvider>
+    <AppProvider client:load>
       <slot />
-    </NotificationProvider>
+    </AppProvider>
   </body>
 </html>
 

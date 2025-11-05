@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import SideBar from "./Sidebar";
-import Dasheader from "./Dasheader";
+import SideBar from "../components/Sidebar";
+import Dasheader from "../components/Dasheader";
 
 interface Props {
   children: React.ReactNode;
