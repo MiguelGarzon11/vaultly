@@ -1,5 +1,6 @@
 import { defineAction } from "astro:actions";
 import { z } from "zod";
+import { navigate } from "astro/virtual-modules/transitions-router.js";
 
 export const server = {
     register: defineAction({
@@ -28,8 +29,8 @@ export const server = {
 
                 const data = await res.json();
 
-                if (!res.ok) {
-                    throw new Error(data.error || "Error al registrar usuario");
+                if(data.ok === false) {
+                    
                 }
 
                 return {
