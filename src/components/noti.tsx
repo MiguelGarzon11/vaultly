@@ -1,10 +1,9 @@
 import React from "react";
-import type { NotificationType } from "../context/NotificationContext";
 
 interface NotificationProps {
   title: string;
   message: string;
-  type: NotificationType;
+  type: string;
 }
 
 

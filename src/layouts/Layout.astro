@@ -1,6 +1,5 @@
 ---
 import { ClientRouter } from "astro:transitions";
-import  AppProvider from "../components/AppProvider"
 const { title } = Astro.props;
 ---
 
@@ -14,9 +13,7 @@ const { title } = Astro.props;
     <ClientRouter />
   </head>
   <body class="caret-transparent">
-    <AppProvider client:load>
       <slot />
-    </AppProvider>
   </body>
 </html>
 

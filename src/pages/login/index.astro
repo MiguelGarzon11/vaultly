@@ -1,5 +1,4 @@
 ---
-import Loginform from "../../components/LoginForm";
 import Layout from "../../layouts/Layout.astro";
 ---
 
@@ -52,7 +51,25 @@ import Layout from "../../layouts/Layout.astro";
       <p class="text-secondary-text text-xl text-center w-[90%]">
         Bienvenido de nuevo a tu espacio financiero seguro.
       </p>
-      <Loginform></Loginform>
+      <form class="flex flex-col justify-center items-center w-full px-5 py-10 sm:p-10 gap-5">
+        <input
+          type="email"
+          name="email"
+          id="login"
+          placeholder="myemail@example.com"
+        />
+        <input
+          type="password"
+          name="password"
+          id="login"
+          placeholder="Your password"
+        />
+        <a
+          href=""
+          class="text-start w-full text-primary/80 hover:text-primary/100"
+          >¿Olvido su contraseña?</a>
+        <button id="button">Ingresar</button>
+      </form>
       <div class="flex flex-row gap-2 justify-center items-center w-full">
         <p>¿Aún no tiene un cuenta?</p>
         <a href="/register">
