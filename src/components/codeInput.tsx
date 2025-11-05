@@ -1,6 +1,5 @@
 import React, {useEffect, useRef} from "react";
-import { confirmCode } from "../../services/cognitoService";
-
+import { confirmCode } from "../services/cognitoService";
 export default function CodeInput() {
     
     const inputs = useRef<(HTMLInputElement | null)[]>([]);
