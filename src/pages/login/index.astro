@@ -1,6 +1,5 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import Noti from "../../shared/components/noti.astro";
 ---
 
 <Layout title="Login">
@@ -11,13 +10,17 @@ import Noti from "../../shared/components/noti.astro";
       class="flex flex-row justify-center items-center gap-4 sm:gap-5 mb-10"
       transition:name="vaultly"
     >
-      <img src="/assets/icons/icon.svg" alt="Vaultly Logo" class="w-16 h-16 sm:w-20 sm:h-20"/>
+      <img
+        src="/assets/icons/icon.svg"
+        alt="Vaultly Logo"
+        class="w-16 h-16 sm:w-20 sm:h-20"
+      />
       <h1 class="text-text font-extrabold text-5xl sm:text-7xl">Vaultly</h1>
     </div>
 
-    <Noti type="success" title="Prueba" message="Esto es una prueba"></Noti>
-
-    <div class="fixed inset-0 bg-dark-back/80 backdrop-blur-sm z-50 sm:bg-transparent sm:backdrop-blur-none w-full h-20 rounded-b-4xl">
+    <div
+      class="fixed inset-0 bg-dark-back/80 backdrop-blur-sm z-50 sm:bg-transparent sm:backdrop-blur-none w-full h-20 rounded-b-4xl"
+    >
       <a
         href="/"
         class="absolute left-6 top-7 sm:top-10 sm:left-10 flex flex-row justify-center items-center gap-2 hover:scale-105 transition active:scale-95 hover:text-secondary active:text-secondary"
@@ -37,7 +40,7 @@ import Noti from "../../shared/components/noti.astro";
           <use href="/assets/icons/go.svg"></use>
         </svg>
       </a>
-      <hr class="fixed w-full text-text top-20 sm:hidden">
+      <hr class="fixed w-full text-text top-20 sm:hidden" />
     </div>
     <div
       class="bg-back w-[90%] h-auto sm:w-[70%] lg:w-[600px] rounded-2xl px-5 py-10 sm:p-10 flex flex-col justify-center items-center"
@@ -48,7 +51,9 @@ import Noti from "../../shared/components/noti.astro";
       <p class="text-secondary-text text-xl text-center w-[90%]">
         Bienvenido de nuevo a tu espacio financiero seguro.
       </p>
-      <form class="flex flex-col justify-center items-center w-full px-5 py-10 sm:p-10 gap-5">
+      <form
+        class="flex flex-col justify-center items-center w-full px-5 py-10 sm:p-10 gap-5"
+      >
         <input
           type="email"
           name="email"
@@ -83,6 +88,7 @@ import Noti from "../../shared/components/noti.astro";
 <script>
   import { actions } from "astro:actions";
   import { navigate } from "astro:transitions/client";
+  import { useNotifications } from "../../shared/components/noti";
 
   const form = document.querySelector("form");
   form?.addEventListener("submit", async (event) => {
@@ -90,10 +96,12 @@ import Noti from "../../shared/components/noti.astro";
     const formData = new FormData(form);
     const res = await actions.login(formData);
 
-    if (!res.data) {
-      navigate("/login")
+    if (res.data) {
+      const { notify } = useNotifications();
+      notify(res.data.message, res.data.message, "success");
       return;
     }
-
+    const { notify } = useNotifications();
+    notify("Error", "error", "error");
   });
 </script>
