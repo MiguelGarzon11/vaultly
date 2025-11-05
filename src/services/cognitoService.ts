@@ -15,11 +15,27 @@ export async function register(email: string, password: string) {
 
         const response = await client.send(command);
 
-        return { success: true, data: response }
+        return { ok: true, data: response }
 
-    } catch (error) {
-        console.error("Error registrando usuario en cognito", error);
-        return { success: false, error }
+    } catch (error: any) {
+        
+        switch (error.name) {
+
+            case "UsernameExistsException":
+                return {ok: false, message: "El usuario ya existe.", error: error.name};
+
+            case "InvalidPasswordException":
+                return {ok: false, message: "Contraseña inválida.", error: error.name};
+
+            case "CodeDeliveryFailureException":
+                return {ok: false, message: "Error al enviar el código de verificación.", error: error.name};
+            
+            case "NotAuthorizedException":
+                return {ok: false, message: "La app client no tiene permisos para usar SignUp.", error: error.name};
+
+            default:
+                console.error("Error desconocido:", error);
+        }
     }
 }
 
@@ -45,15 +61,15 @@ export async function login(email: string, password: string) {
         
 
         if (error.name === "UserNotConfirmedException") {
-            return {ok: false, message: "El usuario no esta confirmado."}
+            return {ok: false, message: error.name}
         }
 
         if (error.name === "NotAuthorizedException") {
-            return {ok: false, message: "Contraseña incorrecta o usuario inválido."}
+            return {ok: false, message: error.name}
         }
 
         if (error.name === "UserNotFoundException") {
-            return { ok: false, message: "No existe un usuario con ese correo." };
+            return { ok: false, message: error.name };
         }
 
         console.error("Error desconocido:", error);
@@ -66,6 +82,7 @@ export async function logout() { }
 export async function forwardPasswordReset() { }
 
 export async function confirmCode(username: string, code: string) {
+
     try {
         const command = new ConfirmSignUpCommand({
             ClientId: import.meta.env.COGNITO_CLIENT_ID,
@@ -74,9 +91,26 @@ export async function confirmCode(username: string, code: string) {
         });
 
         const response = await client.send(command)
+
         return { success: true, message: response }
-    } catch (error) {
-        console.error("Error confirmando código:", error);
-        return { success: false, message: error }
+
+    } catch (error: any) {
+
+        switch (error.name) {
+            case "CodeMismatchException":
+                return {ok: false, message: "El código que el usuario ingresó no coincide.", error: error.name};
+
+            case "ExpiredCodeException":
+                return {ok: false, message: "El código ha expirado.", error: error.name};
+
+            case "UserNotFoundException":
+                return {ok: false, message: "No existe un usuario registrado con ese correo.", error: error.name};
+            
+            case "InvalidParameterException":
+                return {ok: false, message: "Parametros invalidos.", error: error.name};
+
+            default:
+                console.error("Error desconocido:", error);
+        }
     }
 }

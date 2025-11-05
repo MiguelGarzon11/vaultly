@@ -1,18 +1,18 @@
 import type { APIRoute } from "astro";
-import { register } from "../../../services/cognitoService";
+import { confirmCode } from "../../../services/cognitoService";
 
 export const POST: APIRoute = async ({ request }) => {
     const body = await request.json();
-    const { email, password } = body;
+    const { code, username } = body;
 
-    if (!email || !password) {
+    if (!code) {
         return new Response(
-            JSON.stringify({ ok: false, message: "Email and password are required." }),
+            JSON.stringify({ ok: false, message: "No code" }),
             { status: 200 }
         );
     }
 
-    const result = await register(email, password);
+    const result = await confirmCode(username, code);
 
     if (result?.ok === true) {
         return new Response(

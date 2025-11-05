@@ -25,7 +25,7 @@ import CodeInput from "../../components/codeInput";
         <CodeInput client:load />
         <button id="button">Verificar Código</button>
         <p class="text-secondary-text">¿No recibiste el código?</p>
-        <button class="text-primary/80 font-medium hover:text-primary"
+        <button id="btt" class="text-primary/80 font-medium hover:text-primary"
           >Reenviar codigo</button
         >
         <hr class="w-full my-5" />
@@ -46,4 +46,29 @@ import CodeInput from "../../components/codeInput";
   </main>
 </Layout>
 
-<script></script>
+<script>
+  import { actions } from "astro:actions";
+
+  const params = new URLSearchParams(window.location.search);
+  const username = params.get("username");
+
+  const form = document.querySelector("form")!;
+  const button = document.getElementById("btt");
+
+  button?.addEventListener("click", async(event) => {
+    event.preventDefault();
+
+    const formData = new FormData(form);
+    const code = formData.get("code");
+
+    if (!code || code.toString().length < 6) {
+      console.log("Se deben ingresar los 6 digitos.");
+      return;
+    }
+
+    const result = await actions.confirmCode(formData)
+    console.log(result);
+
+
+  })
+</script>

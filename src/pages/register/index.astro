@@ -96,14 +96,22 @@ import Layout from "../../layouts/Layout.astro";
 
 <script>
   import { actions } from "astro:actions";
-  import { navigate } from "astro:transitions/client";
 
   const form = document.querySelector("form");
   form?.addEventListener("submit", async (event) => {
     event.preventDefault();
     const formData = new FormData(form);
-    const { error } = await actions.register(formData);
+    const result = await actions.register(formData);
 
-    if (!error) navigate("/register/confirmcode");
+    if (result.data?.ok === true) {
+      console.log("Notificación");
+      setTimeout(() => {
+        window.location.href = `/register/confirmcode?username=${encodeURIComponent(result.data?.username!)}`;
+      }, 1000)
+
+    } else {
+      console.log("Error:", result.data?.error);
+    }
+
   });
 </script>

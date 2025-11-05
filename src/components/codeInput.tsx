@@ -1,12 +1,19 @@
 import React, {useEffect, useRef} from "react";
-import { confirmCode } from "../services/cognitoService";
+
+
 export default function CodeInput() {
     
     const inputs = useRef<(HTMLInputElement | null)[]>([]);
+    const hiddenInputRef = useRef<HTMLInputElement | null>(null);
 
     useEffect(() => {
         inputs.current[0]?.focus();
     })
+
+    function updateHiddenInput() {
+        const code = inputs.current.map(i => i?.value || "").join("");
+        if (hiddenInputRef.current) hiddenInputRef.current.value = code;
+  }
 
     function handleInput(e:React.FormEvent<HTMLInputElement>, index: number) {
 
@@ -19,6 +26,8 @@ export default function CodeInput() {
                 inputs.current[index + 1]?.focus();
             }
         }
+
+        updateHiddenInput();
     }
 
     function handleBackspace(e:React.KeyboardEvent<HTMLInputElement>, index: number) {
@@ -31,35 +40,21 @@ export default function CodeInput() {
 
                 e.preventDefault();
             }
+
+            updateHiddenInput();
         }
         
     }
-
-    function confirmCode() {
-        const code = getCode();
-
-        
-    }
-
-    function getCode() {
-        const values = inputs.current.map(input => input?.value?.trim() || "" );
-
-        const hasEmpty = values.some((value) => {value === ""});
-
-        if (hasEmpty) {
-            return {success: false, message: "Número vacío o invalido"}
-        }
-
-        return values.join("");
-    }
-
 
     return (
-        <form className="flex gap-3 mb-10" onSubmit={(e) => e.preventDefault()}>
-          {Array(6).fill("").map((_,i) => (
-            <input id="code" maxLength={1} key={i} inputMode="numeric" onKeyDown={(e) => handleBackspace(e, i)} onInput={(e) => handleInput(e, i)} ref={(el) => {inputs.current[i] = el}} ></input>
-          ))}
-        </form>
+        <>
+            <form className="flex gap-3 mb-10" onSubmit={(e) => e.preventDefault()}>
+            {Array(6).fill("").map((_,i) => (
+                <input id="code" maxLength={1} key={i} inputMode="numeric" onKeyDown={(e) => handleBackspace(e, i)} onInput={(e) => handleInput(e, i)} ref={(el) => {inputs.current[i] = el}} ></input>
+            ))}
+            </form>
+            <input type="hidden" name="code" ref={hiddenInputRef} />
+        </>
     )
 }
 
