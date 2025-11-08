@@ -4,9 +4,9 @@ import Card from "../../shared/components/card.astro";
 ---
 
 <DashboardLayout title="Dashboard">
-  <div class="flex flex-col gap-5">
-    <h1 class="text-text text-5xl font-medium">Dashboard</h1>
-    <p class="text-secondary-text text-2xl font-extralight">
+  <div class="flex flex-col gap-2 sm:gap-5">
+    <h1 class="text-text text-2xl sm:text-5xl font-medium">Dashboard</h1>
+    <p class="text-secondary-text text-lg sm:text-2xl font-extralight">
       Bienvenido a tu panel de control financiero
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 grid-rows-2 gap-5">
@@ -17,10 +17,9 @@ import Card from "../../shared/components/card.astro";
         value="2,000.000"
         subvalor="+12.5% vs mes anterior"
       />
-      <Card titulo="Ingresos del mes"/>
-      <Card titulo="Gastos del mes"/>
-      <Card titulo="Ahorro del mes"/>
+      <Card titulo="Ingresos del mes" />
+      <Card titulo="Gastos del mes" />
+      <Card titulo="Ahorro del mes" />
     </div>
-    
   </div>
 </DashboardLayout>

@@ -4,21 +4,27 @@ const { redirect, titulo, icono, value, subvalor } = Astro.props;
 
 <a
   href={redirect}
-  class="w-full h-full cursor-pointer hover:drop-shadow-lg hover:drop-shadow-secondary-text/30"
+  class="w-full h-full cursor-pointer hover:drop-shadow-lg hover:drop-shadow-secondary-text/30 active:drop-shadow-lg active:drop-shadow-secondary-text/30"
 >
   <div
     class="w-full h-full rounded-2xl flex flex-col bg-white justify-center items-center gap-5 p-8 ring-1 ring-secondary-text/10"
   >
     <div class="flex flex-row justify-between w-full">
-      <h2 class="text-secondary-text text-lg">{titulo}</h2>
-      <img src={"assets/icons/" + icono + ".svg"} alt="icono" class="w-8 h-8" />
+      <h2 class="text-secondary-text text-sm sm:text-lg">{titulo}</h2>
+      <img
+        src={"assets/icons/" + icono + ".svg"}
+        alt="icono"
+        class="w-6 h-6 sm:w-8 sm:h-8"
+      />
     </div>
     <div class="w-full">
-      <h1 class="text-4xl font-medium text-text text-start">${value}</h1>
+      <h1 class="text-2xl sm:text-4xl font-medium text-text text-start">
+        ${value}
+      </h1>
     </div>
     <div class="w-full flex flex-row items-center gap-2">
       <img src={"assets/icons/" + icono + ".svg"} alt="icono" class="w-4 h-4" />
-      <p class="">{subvalor}</p>
+      <p class="text-sm sm:text-lg">{subvalor}</p>
     </div>
   </div>
 </a>

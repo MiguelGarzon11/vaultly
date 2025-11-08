@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SideBar from "../components/Sidebar";
 import Dasheader from "../components/Dasheader";
+import Nav from "../components/Nav";
 
 interface Props {
   children: React.ReactNode;
@@ -15,12 +16,13 @@ export default function DashboardLayout({ children }: Props) {
   };
 
   return (
-    <main className="h-full w-full flex flex-row bg-dark-back/60 items-start caret-transparent">
+    <main className="h-screen sm:h-screen w-full flex flex-row bg-dark-back items-start caret-transparent px-3 py-5 sm:py-0 sm:px-0">
+      <Nav></Nav>
       <SideBar isOpen={isOpen} />
       <div className="flex flex-col w-full h-full">
         <Dasheader isOpen={isOpen} toggleSidebar={toggleSidebar} />
-        <hr />
-        <div className="p-4 sm:p-12">{children}</div>
+        <hr className="hidden sm:flex" />
+        <div className="mt-24 p-4 sm:p-12 sm:mt-0">{children}</div>
       </div>
     </main>
   );

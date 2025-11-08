@@ -9,13 +9,13 @@ export default function SideBar({ isOpen }: Props) {
   return (
     <main
       className={clsx(
-        "inset-0 h-[100%] bg-primary flex flex-col caret-transparent transition-all duration-200",
+        "hidden inset-0 h-[100%] bg-primary sm:flex flex-col caret-transparent transition-all duration-200",
         isOpen
           ? "w-[70%] sm:w-[40%] md:w-[35%] lg:w-[25%] rounded-r-4xl py-6 sm:py-10 px-6 sm:px-8"
           : "w-[10%] sm:w-[8%] md:w-[4%] lg:w-[5%] rounded-r-2xl sm:py-3 sm:p-1 md:py-5 lg:py-5 justify-center"
-      )}>
-      <div
-        className="w-full h-auto flex flex-row sm:gap-5 md:gap-5 mb-4 items-center justify-center px-3">
+      )}
+    >
+      <div className="w-full h-auto flex flex-row sm:gap-5 md:gap-5 mb-4 items-center justify-center px-3">
         <img
           src="/assets/icons/iconwhite.svg"
           alt="Vaultly Logo"
@@ -24,7 +24,6 @@ export default function SideBar({ isOpen }: Props) {
             isOpen
               ? "h-10 w-10 sm:h-12 sm:w-12 md:w-14 md:h-14"
               : "h-10 w-10 md:h-12 md:w-12 lg:w-10 lg:h-10"
-
           )}
         />
         {isOpen && (
