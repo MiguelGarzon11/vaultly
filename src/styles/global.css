@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import 'tailwindcss';
+@import "tailwindcss";
 @plugin "@midudev/tailwind-animations";
 
 @theme {
@@ -11,6 +11,14 @@
   --color-text: #111827;
   --color-secondary-text: #6b7280;
   --color-acent: #fbbf24;
+}
+
+@utility shadow-1 {
+  box-shadow: 3px 5px 0 0 var(--color-dark-back);
+}
+
+@utility shadow-2 {
+  box-shadow: -3px 5px 0 0 var(--color-dark-back);
 }
 
 hr {

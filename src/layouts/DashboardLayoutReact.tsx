@@ -22,7 +22,7 @@ export default function DashboardLayout({ children }: Props) {
       <div className="flex flex-col w-full h-full">
         <Dasheader isOpen={isOpen} toggleSidebar={toggleSidebar} />
         <hr className="hidden sm:flex" />
-        <div className="mt-24 p-4 sm:p-12 sm:mt-0">{children}</div>
+        <div className="mt-28 p-4 sm:p-12 sm:mt-0">{children}</div>
       </div>
     </main>
   );
