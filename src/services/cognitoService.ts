@@ -15,23 +15,24 @@ export async function register(email: string, password: string) {
 
         const response = await client.send(command);
 
-        return { ok: true, data: response }
+        console.log(response.CodeDeliveryDetails);
+        return { ok: true, data: response.CodeDeliveryDetails }
 
     } catch (error: any) {
-        
+
         switch (error.name) {
 
             case "UsernameExistsException":
-                return {ok: false, message: "El usuario ya existe.", error: error.name};
+                return { ok: false, message: "El usuario ya existe.", error: error.name };
 
             case "InvalidPasswordException":
-                return {ok: false, message: "Contraseña inválida.", error: error.name};
+                return { ok: false, message: "Contraseña inválida.", error: error.name };
 
             case "CodeDeliveryFailureException":
-                return {ok: false, message: "Error al enviar el código de verificación.", error: error.name};
-            
+                return { ok: false, message: "Error al enviar el código de verificación.", error: error.name };
+
             case "NotAuthorizedException":
-                return {ok: false, message: "La app client no tiene permisos para usar SignUp.", error: error.name};
+                return { ok: false, message: "La app client no tiene permisos para usar SignUp.", error: error.name };
 
             default:
                 console.error("Error desconocido:", error);
@@ -55,17 +56,17 @@ export async function login(email: string, password: string) {
         const command = new InitiateAuthCommand(input);
         const response = await client.send(command);
 
-        return {ok: true, data: response}
+        return { ok: true, data: response }
 
     } catch (error: any) {
-        
+
 
         if (error.name === "UserNotConfirmedException") {
-            return {ok: false, message: error.name}
+            return { ok: false, message: error.name }
         }
 
         if (error.name === "NotAuthorizedException") {
-            return {ok: false, message: error.name}
+            return { ok: false, message: error.name }
         }
 
         if (error.name === "UserNotFoundException") {
@@ -73,7 +74,7 @@ export async function login(email: string, password: string) {
         }
 
         console.error("Error desconocido:", error);
-        return {ok: false, message: "Ocurrió un error al iniciar sesión."}
+        return { ok: false, message: "Ocurrió un error al iniciar sesión." }
     }
 }
 
@@ -92,25 +93,30 @@ export async function confirmCode(username: string, code: string) {
 
         const response = await client.send(command)
 
-        return { success: true, message: response }
+        if (response.$metadata.httpStatusCode !== 200) {
+            return { ok: false, message: "Error confirmando el código." }
+        }
+
+        return { ok: true, message: response }
 
     } catch (error: any) {
 
         switch (error.name) {
             case "CodeMismatchException":
-                return {ok: false, message: "El código que el usuario ingresó no coincide.", error: error.name};
+                return { ok: false, message: "El código que el usuario ingresó no coincide.", error: error.name };
 
             case "ExpiredCodeException":
-                return {ok: false, message: "El código ha expirado.", error: error.name};
+                return { ok: false, message: "El código ha expirado.", error: error.name };
 
             case "UserNotFoundException":
-                return {ok: false, message: "No existe un usuario registrado con ese correo.", error: error.name};
-            
+                return { ok: false, message: "No existe un usuario registrado con ese correo.", error: error.name };
+
             case "InvalidParameterException":
-                return {ok: false, message: "Parametros invalidos.", error: error.name};
+                return { ok: false, message: "Parametros invalidos.", error: error.name };
 
             default:
-                console.error("Error desconocido:", error);
+                console.error("Error desconocido:", error.name);
+                return { ok: false, message: "Error desconocido al confirmar el código.", error: error.name };
         }
     }
 }

@@ -22,8 +22,11 @@ import CodeInput from "../../components/codeInput";
         >
           Hemos enviado un código de 6 dígitos a tu correo electrónico
         </p>
-        <CodeInput client:load />
-        <button id="button">Verificar Código</button>
+        <form>
+          <CodeInput client:load />
+          <input type="hidden" name="username" id="username" />
+          <button id="button">Verificar Código</button>
+        </form>
         <p class="text-secondary-text">¿No recibiste el código?</p>
         <button id="btt" class="text-primary/80 font-medium hover:text-primary"
           >Reenviar codigo</button
@@ -49,26 +52,35 @@ import CodeInput from "../../components/codeInput";
 <script>
   import { actions } from "astro:actions";
 
+  const form = document.querySelector("form")!;
+  const button = document.getElementById("button");
   const params = new URLSearchParams(window.location.search);
   const username = params.get("username");
 
-  const form = document.querySelector("form")!;
-  const button = document.getElementById("btt");
-
-  button?.addEventListener("click", async(event) => {
+  button?.addEventListener("click", async (event) => {
     event.preventDefault();
 
     const formData = new FormData(form);
     const code = formData.get("code");
 
     if (!code || code.toString().length < 6) {
-      console.log("Se deben ingresar los 6 digitos.");
+      console.log("Se deben ingresar los 6 dígitos.");
       return;
     }
 
-    const result = await actions.confirmCode(formData)
-    console.log(result);
+    try {
+      const result = await actions.confirmCode(formData);
 
-
-  })
+      if (result.data?.ok) {
+        console.log("Código confirmado correctamente");
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 500);
+      } else {
+        console.error("Error:", result.data?.message || "Código inválido");
+      }
+    } catch (error) {
+      console.error("Error ejecutando acción:", error);
+    }
+  });
 </script>

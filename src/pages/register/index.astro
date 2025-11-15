@@ -6,7 +6,9 @@ import Layout from "../../layouts/Layout.astro";
   <main
     class="flex flex-col justify-center items-center w-full h-auto bg-back sm:gap-10 caret-transparent py-26"
   >
-    <div class="fixed inset-0 bg-back/80 backdrop-blur-sm z-50 w-full h-20 rounded-b-4xl">
+    <div
+      class="fixed inset-0 bg-back/80 backdrop-blur-sm z-50 w-full h-20 rounded-b-4xl"
+    >
       <a
         href="/"
         class="absolute left-6 top-7 sm:top-10 sm:left-10 flex flex-row justify-center items-center gap-2 hover:scale-105 transition active:scale-95 hover:text-secondary active:text-secondary"
@@ -26,14 +28,18 @@ import Layout from "../../layouts/Layout.astro";
           <use href="/assets/icons/go.svg"></use>
         </svg>
       </a>
-      <hr class="fixed w-full text-text top-20 sm:hidden"/>
+      <hr class="fixed w-full text-text top-20 sm:hidden" />
     </div>
 
     <div
       class="flex flex-row justify-center items-center gap-4 sm:gap-5 mb-10"
       transition:name="vaultly"
     >
-      <img src="/assets/icons/icon.svg" alt="Vaultly Logo" class="w-16 h-16 sm:w-20 sm:h-20"/>
+      <img
+        src="/assets/icons/icon.svg"
+        alt="Vaultly Logo"
+        class="w-16 h-16 sm:w-20 sm:h-20"
+      />
       <h1 class="text-text font-extrabold text-5xl sm:text-7xl">Vaultly</h1>
     </div>
 
@@ -83,7 +89,7 @@ import Layout from "../../layouts/Layout.astro";
             >¿olvido su contraseña?</a
           >
           <button type="submit" id="button">Crear cuenta</button>
-          <a
+          <a 
             href="/login"
             class="text-white/80 text-[16px] hover:text-white/100 text-center"
             >¿Ya tiene una cuenta?</a
@@ -104,14 +110,11 @@ import Layout from "../../layouts/Layout.astro";
     const result = await actions.register(formData);
 
     if (result.data?.ok === true) {
-      console.log("Notificación");
       setTimeout(() => {
         window.location.href = `/register/confirmcode?username=${encodeURIComponent(result.data?.username!)}`;
-      }, 1000)
-
+      }, 500);
     } else {
       console.log("Error:", result.data?.error);
     }
-
   });
 </script>
