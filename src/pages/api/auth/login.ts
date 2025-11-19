@@ -14,27 +14,14 @@ export const POST: APIRoute = async ({ request }) => {
 
     const result = await login(email, password);
 
-    if((await result).message === "El usuario no esta confirmado.") {
-        return new Response(JSON.stringify({ok: false, message: (await result).message}))
-    }
+    console.log(result.data)
 
-    if((await result).message === "Contraseña incorrecta o usuario inválido.") {
-        return new Response(JSON.stringify({ok: false, message: (await result).message}))
-    }
+    if (result.ok === true) {
 
-    if((await result).message === "No existe un usuario con ese correo.") {
-        return new Response(JSON.stringify({ok: false, message: (await result).message}))
-    }
+        return new Response( JSON.stringify({ ok: true, message: result.message, token: result.data?.AccessToken, username: result.username}), { status: 200 });
 
-    if((await result).message === "Ocurrió un error al iniciar sesión.") {
-        return new Response(JSON.stringify({ok: false, message: (await result).message}))
+    } else {
+        return new Response( JSON.stringify({ ok: false, message: result.message, error: result.error}))
     }
-
-    return new Response(JSON.stringify({
-        ok: true,
-        message: "Login exitoso",
-        token: (await result.ok)
-    }))
-    
 
 };

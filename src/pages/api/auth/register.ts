@@ -16,8 +16,9 @@ export const POST: APIRoute = async ({ request }) => {
 
     if (result?.ok === true) {
         return new Response(
-            JSON.stringify({ ok: true, message: "User registered successfully.", status: 200, username: result.data?.Destination }),
+            JSON.stringify({ ok: true, message: result.message, username: result.data?.Destination }), {status: 200 }
         );
+
     } else {
         return new Response(
             JSON.stringify({ ok: false, message: result?.message, error: result?.error }), { status: 400 }

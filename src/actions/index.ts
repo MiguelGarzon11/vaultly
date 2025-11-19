@@ -36,12 +36,7 @@ export const server = {
 
                 console.log({ ok: data.ok, message: data.message, detail: data.detail })
 
-                return {
-                    ok: true,
-                    message: data.message,
-                    detail: "Confirma el correo.",
-                    username: data.username
-                };
+                return { ok: true, message: data.message, username: data.username }
 
             } catch (error: any) {
 
@@ -80,66 +75,38 @@ export const server = {
 
                 const data = await res.json();
 
-                if (data.ok === false) {
-                    if ((await data).message === "El usuario no esta confirmado.") {
-                        return {
-                            ok: false,
-                            alert: {
-                                type: "error",
-                                message: "No se puedo iniciar sesión.",
-                                detail: data.message,
-                            }
-                        }
-                    }
-
-                    if ((await data).message === "Contraseña incorrecta o usuario inválido.") {
-                        return {
-                            ok: false,
-                            alert: {
-                                type: "error",
-                                message: "No se puedo iniciar sesión.",
-                                detail: data.message,
-                            }
-                        }
-                    }
-
-                    if ((await data).message === "No existe un usuario con ese correo.") {
-                        return {
-                            ok: false,
-                            alert: {
-                                type: "error",
-                                message: "No se puedo iniciar sesión.",
-                                detail: data.message,
-                            }
-                        }
-                    }
-
-                    if ((await data).message === "Ocurrió un error al iniciar sesión.") {
-                        return {
-                            ok: false,
-                            alert: {
-                                type: "error",
-                                message: "No se puedo iniciar sesión.",
-                                detail: data.message,
-                            }
-                        }
-                    }
+                if (data.ok === false || !res.ok) {
+                    throw { name: data.error || "LoginError", message: data.message }
                 }
 
-                return {
-                    ok: true,
-                    message: data.message,
-                    alert: {
-                        type: "success",
-                        message: "Inicio de sesión exitoso.",
-                        detail: null,
-                    }
-                };
-            } catch (error) {
-                return {
-                    ok: false,
-                    message: (error),
-                };
+                console.log({ ok: data.ok, message: data.message, detail: data.detail })
+
+                return { ok: true, message: data.message, token: data.token, username: data.username}
+
+
+            } catch (error: any) {
+
+                console.log(error)
+
+                switch (error.name) {
+                    case "UsernameExistsException":
+                        return { ok: false, message: "El usuario ya existe.", error: error.name };
+
+                    case "InvalidPasswordException":
+                        return { ok: false, message: "Contraseña no permitida.", error: error.name };
+                    
+                    case "UserNotConfirmedException" : 
+                        return { ok: false, message: "Correo electrónico no verificado."}
+
+                    case "NotAuthorizedException": 
+                        return { ok: false, message: "Contraseña o correo incorrectos.", error: error.name }
+
+                    case "UserNotFoundException": 
+                        return { ok: false, message: "Usuario no registrado.", error: error.name }
+
+                    default:
+                        console.error("Error desconocido:", error);
+                }
             }
         }
     }),

@@ -16,27 +16,10 @@ export async function register(email: string, password: string) {
         const response = await client.send(command);
 
         console.log(response.CodeDeliveryDetails);
-        return { ok: true, data: response.CodeDeliveryDetails }
+        return { ok: true, message: "Usuario registrado con éxito.", data: response.CodeDeliveryDetails }
 
     } catch (error: any) {
-
-        switch (error.name) {
-
-            case "UsernameExistsException":
-                return { ok: false, message: "El usuario ya existe.", error: error.name };
-
-            case "InvalidPasswordException":
-                return { ok: false, message: "Contraseña inválida.", error: error.name };
-
-            case "CodeDeliveryFailureException":
-                return { ok: false, message: "Error al enviar el código de verificación.", error: error.name };
-
-            case "NotAuthorizedException":
-                return { ok: false, message: "La app client no tiene permisos para usar SignUp.", error: error.name };
-
-            default:
-                console.error("Error desconocido:", error);
-        }
+        return { ok: false, error: error.name}
     }
 }
 
@@ -51,31 +34,15 @@ export async function login(email: string, password: string) {
         },
     };
 
-
     try {
         const command = new InitiateAuthCommand(input);
         const response = await client.send(command);
 
         console.log(response.$metadata)
-        return {ok: true, message: "Todo ok"}
+        return {ok: true, message: "Login successfully.", data: response.AuthenticationResult, username: email }
 
     } catch (error: any) {
-
-
-        if (error.name === "UserNotConfirmedException") {
-            return { ok: false, message: error.name }
-        }
-
-        if (error.name === "NotAuthorizedException") {
-            return { ok: false, message: error.name }
-        }
-
-        if (error.name === "UserNotFoundException") {
-            return { ok: false, message: error.name };
-        }
-
-        console.error("Error desconocido:", error);
-        return { ok: false, message: "Ocurrió un error al iniciar sesión." }
+        return { ok: false, error: error.name}
     }
 }
 
