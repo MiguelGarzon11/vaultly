@@ -34,3 +34,14 @@ const { title } = Astro.props;
     caret: transparent;
   }
 </style>
+
+<script>
+  import { navigate } from "astro:transitions/client";
+
+  const token = sessionStorage.getItem("token");
+
+  if (!token) {
+    navigate("/login");
+  }
+
+</script>

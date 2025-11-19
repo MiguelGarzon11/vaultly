@@ -57,12 +57,14 @@ import Layout from "../../layouts/Layout.astro";
           name="email"
           id="login"
           placeholder="myemail@example.com"
+          required
         />
         <input
           type="password"
           name="password"
           id="login"
           placeholder="Your password"
+          required
         />
         <a
           href=""
@@ -83,5 +85,32 @@ import Layout from "../../layouts/Layout.astro";
 </Layout>
 
 <script>
+  import {actions} from 'astro:actions';
+  import { navigate } from 'astro:transitions/client';
+
+  const form = document.querySelector("form");
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(form);
+    const result = await actions.login(formData);
+
+    if (result.data?.ok === true) {
+
+      if (result.data.token) {
+        sessionStorage.setItem("token", result.data.token)
+      } else navigate("/login")
+      
+      setTimeout(() => {
+        alert(result.data?.message)
+        navigate("/dashboard") 
+      }, 500)
+
+    } else {
+      alert(result.data?.message)
+      console.log("Error al iniciar sesión: ", result.data?.error)
+    }
+  })
 
 </script>
