@@ -21,6 +21,7 @@ export const server = {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
+                        "Accept": "application/json",
                     },
                     body: JSON.stringify({
                         email: input.email,
@@ -67,6 +68,10 @@ export const server = {
 
                 const res = await fetch(`${API_BASE}login`, {
                     method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                    },
                     body: JSON.stringify({
                         email: input.email,
                         password: input.password
