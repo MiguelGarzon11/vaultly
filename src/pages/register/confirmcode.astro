@@ -13,25 +13,25 @@ import CodeInput from "../../components/codeInput";
       >
         <img
           src="/assets/icons/icon.svg"
-          class="w-20 h-20 mb-8"
+          class="w-16 h-16 mb-5"
           transition:name="logo"
         />
-        <h1 class="text-4xl font-bold">Verifica tu correo</h1>
+        <h1 class="text-2xl font-bold">Verifica tu correo</h1>
         <p
-          class="text-xl font-extralight text-secondary-text text-center w-[70%]"
+          class="text-sm font-extralight text-secondary-text text-center w-[70%]"
         >
           Hemos enviado un código de 6 dígitos a tu correo electrónico
         </p>
-        <form>
-          <CodeInput client:load />
-          <input type="hidden" name="username" id="username" />
-          <button id="button">Verificar Código</button>
-        </form>
-        <p class="text-secondary-text">¿No recibiste el código?</p>
-        <button id="btt" class="text-primary/80 font-medium hover:text-primary"
+
+        <CodeInput></CodeInput>
+        <input type="hidden" name="username" id="username" />
+        <button id="button">Verificar Código</button>
+
+        <p class="text-secondary-text text-sm">¿No recibiste el código?</p>
+        <button id="btt" class="text-primary/80 font-medium hover:text-primary text-sm"
           >Reenviar codigo</button
         >
-        <hr class="w-full my-5" />
+        <hr class="w-full my-3" />
         <a href="/register">
           <div
             class="flex flex-row gap-2 justify-center items-center opacity-85 hover:opacity-100"
@@ -39,48 +39,12 @@ import CodeInput from "../../components/codeInput";
             <img
               src="/assets/icons/arrowleft.svg"
               alt="icono volver"
-              class="w-6 h-6"
+              class="w-4 h-4"
             />
-            <p class="text-secondary-text">Volver al registro</p>
+            <p class="text-secondary-text text-sm">Volver al registro</p>
           </div>
         </a>
       </div>
     </section>
   </main>
 </Layout>
-
-<script>
-  import { actions } from "astro:actions";
-
-  const form = document.querySelector("form")!;
-  const button = document.getElementById("button");
-  const params = new URLSearchParams(window.location.search);
-  const username = params.get("username");
-
-  button?.addEventListener("click", async (event) => {
-    event.preventDefault();
-
-    const formData = new FormData(form);
-    const code = formData.get("code");
-
-    if (!code || code.toString().length < 6) {
-      console.log("Se deben ingresar los 6 dígitos.");
-      return;
-    }
-
-    try {
-      const result = await actions.confirmCode(formData);
-
-      if (result.data?.ok) {
-        console.log("Código confirmado correctamente");
-        setTimeout(() => {
-          window.location.href = "/login";
-        }, 500);
-      } else {
-        console.error("Error:", result.data?.message || "Código inválido");
-      }
-    } catch (error) {
-      console.error("Error ejecutando acción:", error);
-    }
-  });
-</script>

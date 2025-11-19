@@ -155,7 +155,7 @@ export const server = {
 
                 const API_BASE = import.meta.env.PUBLIC_API_URL_AUTH
 
-                const res = await fetch(`${API_BASE}login`, {
+                const res = await fetch(`${API_BASE}confirmcode`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -168,10 +168,24 @@ export const server = {
 
                 const data = await res.json();
 
+                if (data.error) {
+                    console.error("ERROR DEL SERVIDOR:", data.error )
+                    return {ok: false, error: data.error}
+                }
+
+                if (!data.ok) {
+                    console.error("API Respondío error: ", data.message)
+                    return {
+                        ok: false,
+                        message: data.message || "Error al confirmar el código",
+                    };
+                }
+
+                console.log({ ok: data.ok, message: data.message, detail: data.detail })
                 return {
                     ok: true,
                     message: data.message,
-                    detail: "Confirma el correo."
+                    detail: "Correo confirmado"
                 };
 
 

@@ -4,18 +4,18 @@ import Layout from "../../layouts/Layout.astro";
 
 <Layout title="Login">
   <main
-    class="bg-dark-back w-full h-auto py-32 sm:h-screen flex flex-col justify-center items-center caret-transparent sm:gap-10"
+    class="bg-dark-back w-full h-full py-32 sm:py-24 md:py-15 sm:h-full flex flex-col justify-center items-center caret-transparent sm:gap-10"
   >
     <div
-      class="flex flex-row justify-center items-center gap-4 sm:gap-5 mb-10"
+      class="flex flex-row justify-center items-center gap-4 sm:gap-5 mb-5 sm:mb-0"
       transition:name="vaultly"
     >
       <img
         src="/assets/icons/icon.svg"
         alt="Vaultly Logo"
-        class="w-16 h-16 sm:w-20 sm:h-20"
+        class="w-14 h-14 sm:w-16 sm:h-16"
       />
-      <h1 class="text-text font-extrabold text-5xl sm:text-7xl">Vaultly</h1>
+      <h1 class="text-text font-extrabold text-5xl">Vaultly</h1>
     </div>
 
     <div
@@ -25,33 +25,33 @@ import Layout from "../../layouts/Layout.astro";
         href="/"
         class="absolute left-6 top-7 sm:top-10 sm:left-10 flex flex-row justify-center items-center gap-2 hover:scale-105 transition active:scale-95 hover:text-secondary active:text-secondary"
       >
-        <svg class="w-6 h-6 sm:w-8 sm:h-8">
+        <svg class="w-4 h-4 sm:w-6 sm:h-6">
           <use href="/assets/icons/back.svg"></use>
         </svg>
-        <p class="text-lg sm:text-xl font-medium">Inicio</p>
+        <p class="text-lg font-medium">Inicio</p>
       </a>
 
       <a
         href="/register"
         class="absolute right-6 top-7 sm:top-10 sm:right-10 flex flex-row justify-center items-center gap-2 hover:scale-105 transition active:scale-95 hover:text-secondary active:text-secondary"
       >
-        <p class="text-lg sm:text-xl font-medium">Registrarse</p>
-        <svg class="w-6 h-6 sm:w-8 sm:h-8">
+        <p class="text-lg font-medium">Registrarse</p>
+        <svg class="w-4 h-4 sm:w-6 sm:h-6">
           <use href="/assets/icons/go.svg"></use>
         </svg>
       </a>
       <hr class="fixed w-full text-text top-20 sm:hidden" />
     </div>
     <div
-      class="bg-back w-[90%] h-auto sm:w-[70%] lg:w-[600px] rounded-2xl px-5 py-10 sm:p-10 flex flex-col justify-center items-center"
+      class="bg-back w-[90%] h-auto sm:w-[70%] lg:w-[500px] rounded-2xl px-5 py-10 sm:p-10 flex flex-col justify-center items-center"
     >
-      <h2 class="text-center text-2xl sm:text-3xl text-text font-bold py-5">
+      <h2 class="text-center text-xl sm:text-2xl text-text font-bold pb-5">
         Iniciar sesión
       </h2>
-      <p class="text-secondary-text text-xl text-center w-[90%]">
+      <p class="text-secondary-text text-sm text-center w-[80%]">
         Bienvenido de nuevo a tu espacio financiero seguro.
       </p>
-      <form class="flex flex-col justify-center items-center w-full px-5 py-10 sm:p-10 gap-5">
+      <form class="flex flex-col justify-center items-center w-full px-5 py-10 sm:p-6 gap-5">
         <input
           type="email"
           name="email"
@@ -66,14 +66,14 @@ import Layout from "../../layouts/Layout.astro";
         />
         <a
           href=""
-          class="text-start w-full text-primary/80 hover:text-primary/100"
+          class="text-start w-full text-primary/80 hover:text-primary/100 text-sm"
           >¿Olvido su contraseña?</a>
         <button id="button">Ingresar</button>
       </form>
       <div class="flex flex-row gap-2 justify-center items-center w-full">
-        <p>¿Aún no tiene un cuenta?</p>
+        <p class="text-sm">¿Aún no tiene un cuenta?</p>
         <a href="/register">
-          <span class="text-lg text-primary/80 hover:text-primary/100"
+          <span class="text-primary/80 hover:text-primary/100 text-sm"
             >Registrarse</span
           >
         </a>

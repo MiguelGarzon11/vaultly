@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "tailwindcss";
 @plugin "@midudev/tailwind-animations";
 
 @theme {
@@ -26,11 +25,11 @@ hr {
 }
 
 input {
-  @apply h-10 w-full px-3 py-3 bg-back rounded-xl enabled:border-rose-400 focus:border-0 border-none outline-none ring-primary focus:ring-2 focus:outline-none caret-secondary-text;
+  @apply h-10 w-full px-3 py-3 sm:px-2 sm:py-2 bg-back rounded-xl enabled:border-rose-400 focus:border-0 border-none outline-none ring-primary focus:ring-2 focus:outline-none caret-secondary-text text-sm;
 }
 
 label {
-  @apply text-white font-medium text-xl;
+  @apply text-white font-medium text-lg;
 }
 
 #bt {
@@ -50,7 +49,7 @@ label {
 }
 
 #button {
-  @apply bg-secondary active:scale-95 w-full h-auto px-5 py-3 sm:px-6 sm:py-4 text-lg sm:text-xl text-white font-medium hover:bg-secondary/90 rounded-4xl cursor-pointer transition-all duration-300;
+  @apply bg-secondary active:scale-95 w-full h-auto px-4 py-3 text-sm text-white font-medium hover:bg-secondary/90 rounded-4xl cursor-pointer transition-all duration-300 focus:ring-1 focus:ring-white;
 }
 
 button {

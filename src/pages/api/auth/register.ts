@@ -8,7 +8,7 @@ export const POST: APIRoute = async ({ request }) => {
     if (!email || !password) {
         return new Response(
             JSON.stringify({ ok: false, message: "Email and password are required." }),
-            { status: 200 }
+            { status: 400 }
         );
     }
 

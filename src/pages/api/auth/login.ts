@@ -7,10 +7,12 @@ export const POST: APIRoute = async ({ request }) => {
     const { email, password } = body;
 
     if(!email || !password) {
-        return new Response(JSON.stringify({ ok: false, message: "Email and password are required."}))
+        return new Response(JSON.stringify({ ok: false, message: "Email and password are required."}),
+        {status: 400})
     }
 
-    const result = login(email, password)
+
+    const result = await login(email, password);
 
     if((await result).message === "El usuario no esta confirmado.") {
         return new Response(JSON.stringify({ok: false, message: (await result).message}))
@@ -31,7 +33,8 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response(JSON.stringify({
         ok: true,
         message: "Login exitoso",
-        token: (await result).data?.AuthenticationResult?.AccessToken
+        token: (await result.ok)
     }))
+    
 
 };

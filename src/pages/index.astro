@@ -7,22 +7,22 @@ import Label from "../shared/components/label.astro";
 <Layout>
   <Header client:load/>
   <main class="flex flex-col gap-0 h-auto w-full justify-center items-center">
-    <section class="w-full h-auto sm:h-screen py-30 px-6 flex flex-col justify-center items-center bg-back gap-14">
+    <section class="w-full h-auto sm:h-screen px-6 flex flex-col justify-center items-center bg-back gap-10 lg:gap-14 py-28 sm:py-64 md:py-64 lg:py-72">
       <Label icono="wallet" texto="Una comunidad en crecimiento de ahorradores inteligentes"></Label>
-      <div class="flex flex-col gap-10 text-balance text-center justify-center items-center w-full">
-        <h1 class="text-5xl sm:text-8xl font-bold w-full">Gestiona tu Dinero Fácilmente <br><span class="text-4xl sm:text-7xl bg-clip-text bg-gradient-to-r from-primary to-secondary text-clip text-transparent">Desde Cualquier Lugar</span></h1>
-        <p class="text-xl sm:text-2xl text-secondary-text font-extralight">Organiza tus finanzas sin esfuerzo. Vaultly te permite registrar tus gastos, planificar tu dinero y visualizar todo con claridad en un solo lugar.</p>
+      <div class="flex flex-col gap-10 text-balance text-center justify-center items-center w-[90%]">
+        <h1 class="text-5xl sm:text-6xl font-bold w-full">Gestiona tu Dinero Fácilmente <br><span class="text-4xl sm:text-5xl bg-clip-text bg-gradient-to-r from-primary to-secondary text-clip text-transparent">Desde Cualquier Lugar</span></h1>
+        <p class="text-xl sm:text-lg w-[70%] text-secondary-text font-extralight">Organiza tus finanzas sin esfuerzo. Vaultly te permite registrar tus gastos, planificar tu dinero y visualizar todo con claridad en un solo lugar.</p>
       </div>
       <div class="flex flex-row justify-center items-center gap-4 sm:gap-8">
-        <div class="flex flex-row items-center justify-center w-auto h-auto rounded-2xl bg-primary text-white hover:bg-primary/80 active:bg-primary/80 font-medium text-2xl">
-          <a href="/register" class="flex items-center justify-center h-full w-full gap-1 sm:gap-2 px-3 py-2 sm:px-6 sm:py-4">
-            <p class="text-[14px] sm:text-xl">Comenzar gratis</p>
-            <img src="/assets/icons/arrowright.svg" alt="icono flecha derecha" class="w-8 h-8"/>
+        <div class="flex flex-row items-center justify-center w-auto h-auto rounded-2xl bg-primary text-white hover:bg-primary/80 active:bg-primary/80 font-medium text-xl">
+          <a href="/register" class="flex items-center justify-center h-full w-full sm:gap-2 px-2 py-2 sm:px-5 sm:py-2">
+            <p class="text-sm sm:text-lg text-center">Comenzar gratis</p>
+            <img src="/assets/icons/arrowright.svg" alt="icono flecha derecha" class="w-5.5 h-5.5"/>
           </a>
         </div>
         <div class="flex flex-row items-center justify-center w-auto h-auto rounded-2xl bg-back ring-1 ring-text/50 text-text hover:bg-secondary active:bg-secondary active:text-white hover:text-white font-medium text-2xl hover:ring-0">
-          <a href="/login" class="flex items-center justify-center h-full w-full gap-1 sm:gap-2 px-10 py-3 sm:px-14 sm:py-4">
-            <p class="text-[14px] sm:text-xl">Iniciar Sesión</p>
+          <a href="/login" class="flex items-center justify-center h-full w-full sm:gap-2 px-8 py-2  sm:px-13">
+            <p class="text-sm sm:text-lg">Iniciar Sesión</p>
           </a>
         </div>
       </div>

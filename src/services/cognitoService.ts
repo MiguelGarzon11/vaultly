@@ -56,7 +56,8 @@ export async function login(email: string, password: string) {
         const command = new InitiateAuthCommand(input);
         const response = await client.send(command);
 
-        return { ok: true, data: response }
+        console.log(response.$metadata)
+        return {ok: true, message: "Todo ok"}
 
     } catch (error: any) {
 
