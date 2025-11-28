@@ -11,7 +11,7 @@ export default function SideBar({ isOpen }: Props) {
       className={clsx(
         "hidden inset-0 h-[100%] bg-primary sm:flex flex-col caret-transparent transition-all duration-200",
         isOpen
-          ? "w-[70%] sm:w-[40%] md:w-[35%] lg:w-[25%] rounded-r-4xl py-6 sm:py-10 px-6 sm:px-8"
+          ? "w-[70%] sm:w-[40%] md:w-[35%] lg:w-[22%] rounded-r-4xl py-6 sm:py-10 px-6 sm:px-8"
           : "w-[10%] sm:w-[8%] md:w-[4%] lg:w-[5%] rounded-r-2xl sm:py-3 sm:p-1 md:py-5 lg:py-5 justify-center"
       )}
     >
@@ -22,17 +22,17 @@ export default function SideBar({ isOpen }: Props) {
           className={clsx(
             "transition-all duration-200",
             isOpen
-              ? "h-10 w-10 sm:h-12 sm:w-12 md:w-14 md:h-14"
-              : "h-10 w-10 md:h-12 md:w-12 lg:w-10 lg:h-10"
+              ? "size-10 sm:size-12"
+              : "size-8"
           )}
         />
         {isOpen && (
           <>
             <div className="flex flex-col w-full justify-around">
-              <h1 className="text-white text-2xl md:text-xl lg:text-3xl font-extrabold text-balance">
+              <h1 className="text-white text-2xl md:text-xl lg:text-2xl font-extrabold text-balance">
                 Vaultly
               </h1>
-              <p className="text-dark-back font-light text-[12px] sm:text-sm text-balance">
+              <p className="text-dark-back font-light text-[12px] text-balance">
                 Finanzas Personales
               </p>
             </div>
@@ -41,12 +41,12 @@ export default function SideBar({ isOpen }: Props) {
       </div>
       <hr className="text-white my-3" />
       {isOpen ? (
-        <p className="m-3 text-dark-back font-medium text-xl">Navegación</p>
+        <p className="m-3 text-dark-back font-medium text-sm">Navegación</p>
       ) : null}
       <div className="w-full h-full justify-between flex flex-col my-5 text-white font-normal text-lg">
         <nav
           className={clsx(
-            "flex flex-col w-full h-auto gap-2",
+            "flex flex-col w-full h-auto gap-2 text-sm",
             isOpen ? null : "justify-center items-center"
           )}
         >
@@ -83,7 +83,7 @@ export default function SideBar({ isOpen }: Props) {
             {isOpen ? "Presupuesto" : null}
           </a>
         </nav>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 text-sm">
           <hr className="text-white my-3" />
           <a
             href="/dashboard/configuracion"

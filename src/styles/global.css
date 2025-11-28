@@ -45,7 +45,7 @@ label {
 }
 
 #dIcon {
-  @apply w-6 h-6;
+  @apply size-4;
 }
 
 #button {

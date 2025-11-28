@@ -7,7 +7,7 @@ interface Props {
 
 export default function Dasheader({ isOpen, toggleSidebar }: Props) {
   return (
-    <div className="hidden sm:flex flex-row justify-between items-center py-8 px-10 caret-transparent w-full">
+    <div className="hidden sm:flex flex-row justify-between items-center py-5 px-8 caret-transparent w-full">
       <button
         onClick={toggleSidebar}
         className="h-10 w-10 flex items-center justify-center hover:bg-black/10 rounded-lg cursor-pointer"
@@ -18,9 +18,9 @@ export default function Dasheader({ isOpen, toggleSidebar }: Props) {
         <img
           src="/assets/icons/icon.svg"
           alt="icono usuario"
-          className="h-8 w-8"
+          className="size-7"
         />
-        <h1 className="text-2xl font-extrabold text-secondary-text">Vaultly</h1>
+        <h1 className="text-xl font-extrabold text-secondary-text">Vaultly</h1>
       </div>
     </div>
   );
