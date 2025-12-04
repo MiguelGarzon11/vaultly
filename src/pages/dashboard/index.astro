@@ -1,6 +1,10 @@
 ---
 import DashboardLayout from "../../layouts/DashboardLayout.astro";
 import Card from "../../shared/components/card.astro";
+import Transactionscard from "../../shared/components/transactionscard.astro";
+import Presupuestocard from "../../shared/components/presupuestocard.astro"
+
+const balance = null;
 ---
 
 <DashboardLayout title="Dashboard">
@@ -9,18 +13,29 @@ import Card from "../../shared/components/card.astro";
     <p class="text-secondary-text text-lg font-extralight">
       Bienvenido a tu panel de control financiero
     </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 grid-rows-2 gap-5">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 grid-rows-2 lg:grid-rows-1 gap-5">
       <Card
         redirect="dashboard/presupuesto"
         titulo="Balance total"
         icono="wallet"
-        value="2,000.000"
+        value={balance}
         subvalor="+12.5% vs mes anterior"
       />
-      <Card titulo="Ingresos del mes" />
-      <Card titulo="Gastos del mes" />
-      <Card titulo="Ahorro del mes" />
+      <Card titulo="Ingresos del mes" 
+        icono="arrow-top"
+      />
+      <Card titulo="Gastos del mes"
+        icono="arrow-down"
+      />
+      <Card titulo="Ahorro del mes" 
+       icono="trending-up"
+      />
     </div>
   </div>
+  <div class="w-full h-auto flex flex-col sm:flex-row gap-5 justify-start items-start">
+    <Transactionscard></Transactionscard>
+    <Presupuestocard></Presupuestocard>
+  </div>
+
 </DashboardLayout>
 

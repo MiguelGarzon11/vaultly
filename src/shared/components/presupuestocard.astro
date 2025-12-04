@@ -1,0 +1,44 @@
+---
+const categorias = [
+    { name: "Alimentación", amount_max: 500, expense: 300 },
+    { name: "Transporte", amount_max: 700, expense: 400},
+    { name: "Entretenimiendo", amount_max: 900, expense: 500},
+    { name: "Servicios", amount_max: 1100, expense: 100}
+]
+
+const categoriasConPorcentaje = categorias.map(c => ({
+    ...c,
+    percentage: (c.expense / c.amount_max) * 100
+}))
+
+---
+
+
+<a href="/dashboard/categorias" class="size-full cursor-pointer hover:drop-shadow-lg hover:drop-shadow-secondary-text/30 active:drop-shadow-lg active:drop-shadow-secondary-text/30 h-auto">
+
+    <div class="w-full rounded-2xl bg-white p-10 flex flex-col gap-5 h-auto">
+        <div class="w-full flex-col justify-start items-start">
+            <div class="flex flex-col w-full space-y-2.5">
+                <h1 class="text-lg">Resumen de Presupuesto</h1>
+                <p class="text-sm font-extralight mb-5">Estado de tus presupuestos</p>
+            </div>
+            <div class="space-y-3">
+                {categoriasConPorcentaje.slice(0, 5).map((cx) => (
+                    <div class="flex flex-col space-y-2"> 
+                        <div class="flex justify-between">
+                            <h1 class="text-sm text-text">{cx.name}</h1>
+                            <div class="flex space-x-2">
+                                <p class="text-secondary-text text-sm font-extralight">${cx.expense}</p>
+                                <p class="text-secondary-text text-sm font-extralight">/</p>
+                                <p class="text-secondary-text text-sm font-extralight">${cx.amount_max}</p>
+                            </div>
+                        </div>
+                        <div class="w-full h-4 rounded-lg ring-1 ring-primary bg-transparent flex justify-start items-center p-0.5">
+                            <div class="bg-primary h-full rounded-lg" style={`width: ${cx.percentage}%`}></div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
+</a>

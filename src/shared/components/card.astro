@@ -18,12 +18,12 @@ const { redirect, titulo, icono, value, subvalor } = Astro.props;
       />
     </div>
     <div class="w-full">
-      <h1 class="text-2xl font-medium text-text text-start">
+      <h1 class="text-2xl font-medium text-text/70 text-start">
         ${value}
       </h1>
     </div>
     <div class="w-full flex flex-row items-center gap-2">
-      <img src={"assets/icons/" + icono + ".svg"} alt="icono" class="w-4 h-4" />
+      <img src={"assets/icons/" + icono + ".svg"} alt="icono" class="size-5" />
       <p class="text-[12px]">{subvalor}</p>
     </div>
   </div>

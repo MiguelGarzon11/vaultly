@@ -74,14 +74,6 @@ export default function SideBar({ isOpen }: Props) {
             <img src="/assets/icons/graf.svg" alt="icon grafica" id="dIcon" />
             {isOpen ? "Graficas" : null}
           </a>
-          <a href="/dashboard/presupuesto" id="nav">
-            <img
-              src="/assets/icons/presup.svg"
-              alt="icon presupuesto"
-              id="dIcon"
-            />
-            {isOpen ? "Presupuesto" : null}
-          </a>
         </nav>
         <div className="flex flex-col gap-2 text-sm">
           <hr className="text-white my-3" />

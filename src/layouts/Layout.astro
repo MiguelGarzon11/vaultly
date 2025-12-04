@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import Footer from "../sections/Footer.astro";
 const { title } = Astro.props;
 ---
 
@@ -15,6 +16,7 @@ const { title } = Astro.props;
   <body class="caret-transparent">
       <slot />
   </body>
+  <Footer></Footer>
 </html>
 
 <style is:global>
