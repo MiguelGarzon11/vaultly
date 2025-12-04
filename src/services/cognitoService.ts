@@ -19,7 +19,7 @@ export async function register(email: string, password: string) {
         return { ok: true, message: "Usuario registrado con éxito.", data: response.CodeDeliveryDetails }
 
     } catch (error: any) {
-        return { ok: false, error: error.name}
+        return { ok: false, message: error.name || "No se pudo registrar el usuario.", error: error.name}
     }
 }
 
@@ -42,7 +42,7 @@ export async function login(email: string, password: string) {
         return {ok: true, message: "Login successfully.", data: response.AuthenticationResult, username: email }
 
     } catch (error: any) {
-        return { ok: false, error: error.name}
+        return { ok: false, message: error.message || "No se pudo iniciar sesión.",error: error.name}
     }
 }
 

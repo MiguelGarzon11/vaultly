@@ -4,7 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 
 <Layout title="Register">
   <main
-    class="flex flex-col justify-center items-center w-full h-full bg-back sm:gap-10 caret-transparent py-26 md:py-10"
+    class="flex flex-col justify-center items-center w-full h-auto sm:h-full bg-back sm:gap-10 caret-transparent py-26 md:py-10"
   >
     <div
       class="fixed inset-0 bg-back/80 backdrop-blur-sm md:backdrop-blur-none md:bg-transparent z-50 w-full h-20 rounded-b-4xl"
@@ -32,36 +32,31 @@ import Layout from "../../layouts/Layout.astro";
     </div>
 
     <div
-      class="flex flex-row justify-center items-center gap-4 sm:gap-5"
+      class="flex flex-row justify-center items-center gap-4 mb-5 sm:mb-0"
       transition:name="vaultly"
     >
       <img
         src="/assets/icons/icon.svg"
         alt="Vaultly Logo"
-        class="w-14 h-14 sm:w-16 sm:h-16"
+        class="size-12 sm:size-14"
       />
-      <h1 class="text-text font-extrabold text-5xl">Vaultly</h1>
+      <h1 class="text-text font-extrabold text-4xl sm:text-5xl">Vaultly</h1>
     </div>
 
-    <div
-      class="w-[90%] sm:w-[70%] lg:w-[800px] h-auto flex flex-col justify-center items-center md:flex-row bg-dark-back rounded-tl-4xl rounded-tr-4xl rounded-bl-[90px] rounded-br-4xl overflow-hidden"
-    >
-      <div
-        class="bg-dark-back w-full md:w-[50%] h-auto sm:rounded-l-4xl flex flex-col justify-start md:justify-center items-start p-14 gap-5"
-      >
+    <div class="w-[90%] sm:w-[70%] lg:w-[800px] h-screen sm:h-auto flex flex-col justify-center items-center md:flex-row bg-dark-back rounded-tl-4xl rounded-tr-4xl rounded-bl-[90px] rounded-br-4xl overflow-hidden">
+
+      <div class="bg-dark-back w-full md:w-[50%] h-auto sm:rounded-l-4xl flex flex-col justify-start md:justify-center items-start p-14 gap-5">
         <h2 class="text-3xl font-bold text-text text-balance">
           Regístrate hoy y comienza a dominar tus finanzas.
         </h2>
-        <p
-          class="text-secondary-text text-balance font-sans font-medium text-lg"
-        >
+        <p class="text-secondary-text text-balance font-sans font-medium text-lg">
           Organiza, analiza y crece.
         </p>
       </div>
-      <div
-        class="bg-primary w-full h-full md:w-[60%] rounded-tl-[70px] rounded-bl-[90px] flex flex-col justify-around items-center"
-      >
-        <form class="flex flex-col gap-4 sm:gap-6 md:gap-4 w-full px-12 py-15 sm:p-14">
+
+      <div class="bg-primary w-full h-full md:w-[60%] rounded-tl-[70px] rounded-bl-[90px] flex flex-col justify-around items-center">
+
+        <form class="flex flex-col gap-4 sm:gap-6 md:gap-4 w-full px-12 py-15 sm:p-14" id="RegisterForm">
           <label for="email">Email</label>
           <input
             type="email"
@@ -71,20 +66,36 @@ import Layout from "../../layouts/Layout.astro";
             required
           />
           <label for="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            id="pass"
-            placeholder="Your password"
-            required
-          />
-          <input
-            type="password"
-            name="cPassword"
-            id="cPass"
-            placeholder="Confirm your password"
-            required
-          />
+          <div class="w-full relative flex">
+            <input
+              type="password"
+              name="password"
+              id="pass"
+              placeholder="Your password"
+              required
+            />
+            <button type="button" class="absolute size-7 hover:bg-secondary-text/25 active:bg-secondary-text/25 rounded-full flex justify-center items-center right-1.5 top-1.5" id="eye1">
+              <svg class="size-5" >
+                <use href="/assets/icons/eye.svg" id="use1"></use>
+              </svg>
+            </button>
+          </div>
+            
+          <div class="w-full relative flex">
+            <input
+              type="password"
+              name="cPassword"
+              id="cPass"
+              placeholder="Confirm your password"
+              required
+            />
+            <button type="button" class="absolute size-7 hover:bg-secondary-text/25 active:bg-secondary-text/25 rounded-full flex justify-center items-center right-1.5 top-1.5 m-0" id="eye2">
+              <svg class="size-5" >
+                <use href="/assets/icons/eye.svg" id="use2"></use>
+              </svg>
+            </button>
+          </div>           
+
           <a href="" class="text-white/80 text-sm hover:text-white/100"
             >¿olvido su contraseña?</a
           >
@@ -102,6 +113,39 @@ import Layout from "../../layouts/Layout.astro";
 
 <script>
   import { actions } from "astro:actions";
+
+  const passwordInput = document.getElementById("pass") as HTMLInputElement;
+  const toggleEye1 = document.getElementById("eye1") as HTMLElement;
+
+  const cPasswordInput = document.getElementById("cPass") as HTMLInputElement;
+  const toggleEye2 = document.getElementById("eye2") as HTMLElement;
+
+  const useTag1 = document.getElementById("use1") as HTMLElement;
+  const useTag2 = document.getElementById("use2") as HTMLElement;
+ 
+  toggleEye1?.addEventListener("click", (e) => {
+    e.preventDefault();
+    const isPassword = passwordInput.type === "password";
+    passwordInput.type = isPassword ? "text" : "password";
+
+    if (isPassword) {
+      useTag1.setAttribute("href", "/assets/icons/eyeclose.svg");
+    } else {
+      useTag1.setAttribute("href", "/assets/icons/eye.svg");
+    }
+  })
+
+  toggleEye2.addEventListener("click", (e) => {
+    e.preventDefault();
+    const isCpassword = cPasswordInput.type === "password";
+    cPasswordInput.type = isCpassword ? "text" : "password";
+
+    if (isCpassword) {
+      useTag2.setAttribute("href", "/assets/icons/eyeclose.svg");
+    } else {
+      useTag2.setAttribute("href", "/assets/icons/eye.svg");
+    }
+  })
 
   const form = document.querySelector("form");
   form?.addEventListener("submit", async (event) => {

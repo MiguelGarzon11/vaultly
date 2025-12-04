@@ -3,72 +3,65 @@ import Layout from "../../layouts/Layout.astro";
 ---
 
 <Layout title="Login">
-  <main
-    class="bg-dark-back w-full h-full py-32 sm:py-24 md:py-15 sm:h-full flex flex-col justify-center items-center caret-transparent sm:gap-10"
-  >
-    <div
-      class="flex flex-row justify-center items-center gap-4 sm:gap-5 mb-5 sm:mb-0"
-      transition:name="vaultly"
-    >
+  <main class="bg-dark-back w-full h-full py-32 sm:py-24 md:py-15 sm:h-full flex flex-col justify-center items-center caret-transparent sm:gap-10">
+    <div class="flex flex-row justify-center items-center gap-4 mb-5" transition:name="vaultly">
       <img
         src="/assets/icons/icon.svg"
         alt="Vaultly Logo"
-        class="w-14 h-14 sm:w-16 sm:h-16"
+        class="size-12 sm:size-14"
       />
-      <h1 class="text-text font-extrabold text-5xl">Vaultly</h1>
+      <h1 class="text-text font-extrabold text-4xl sm:text-5xl">Vaultly</h1>
     </div>
 
-    <div
-      class="fixed inset-0 bg-dark-back/80 backdrop-blur-sm z-50 sm:bg-transparent sm:backdrop-blur-none w-full h-20 rounded-b-4xl"
-    >
-      <a
-        href="/"
-        class="absolute left-6 top-7 sm:top-10 sm:left-10 flex flex-row justify-center items-center gap-2 hover:scale-105 transition active:scale-95 hover:text-secondary active:text-secondary"
-      >
+    <div class="fixed inset-0 bg-dark-back/80 backdrop-blur-sm z-50 sm:bg-transparent sm:backdrop-blur-none w-full h-20 rounded-b-4xl">
+      <a href="/" class="absolute left-6 top-7 sm:top-10 sm:left-10 flex flex-row justify-center items-center gap-2 hover:scale-105 transition active:scale-95 hover:text-secondary active:text-secondary">
         <svg class="w-4 h-4 sm:w-6 sm:h-6">
           <use href="/assets/icons/back.svg"></use>
         </svg>
         <p class="text-lg font-medium">Inicio</p>
       </a>
 
-      <a
-        href="/register"
-        class="absolute right-6 top-7 sm:top-10 sm:right-10 flex flex-row justify-center items-center gap-2 hover:scale-105 transition active:scale-95 hover:text-secondary active:text-secondary"
-      >
+      <a href="/register" class="absolute right-6 top-7 sm:top-10 sm:right-10 flex flex-row justify-center items-center gap-2 hover:scale-105 transition active:scale-95 hover:text-secondary active:text-secondary">
         <p class="text-lg font-medium">Registrarse</p>
         <svg class="w-4 h-4 sm:w-6 sm:h-6">
           <use href="/assets/icons/go.svg"></use>
         </svg>
       </a>
       <hr class="fixed w-full text-text top-20 sm:hidden" />
+
     </div>
-    <div
-      class="bg-back w-[90%] h-auto sm:w-[70%] lg:w-[500px] rounded-2xl px-5 py-10 sm:p-10 flex flex-col justify-center items-center"
-    >
+    <div class="bg-back w-[85%] h-auto sm:w-[70%] lg:w-[500px] rounded-2xl px-5 py-10 sm:p-10 flex flex-col justify-center items-center">
       <h2 class="text-center text-xl sm:text-2xl text-text font-bold pb-5">
         Iniciar sesión
       </h2>
       <p class="text-secondary-text text-sm text-center w-[80%]">
         Bienvenido de nuevo a tu espacio financiero seguro.
       </p>
-      <form class="flex flex-col justify-center items-center w-full px-5 py-10 sm:p-6 gap-5">
+      <form class="flex flex-col justify-center items-center w-full px-5 py-10 sm:p-6 gap-5" id="loginForm">
         <input
           type="email"
           name="email"
-          id="login"
+          id="email"
           placeholder="myemail@example.com"
           required
         />
-        <input
-          type="password"
-          name="password"
-          id="login"
-          placeholder="Your password"
-          required
-        />
-        <a
-          href=""
-          class="text-start w-full text-primary/80 hover:text-primary/100 text-sm"
+
+        <div class="w-full relative flex">
+            <input
+              type="password"
+              name="password"
+              id="pass"
+              placeholder="Your password"
+              required
+            />
+            <button type="button" class="absolute size-7 hover:bg-secondary-text/25 active:bg-secondary-text/25 rounded-full flex justify-center items-center right-1.5 top-1.5" id="eye">
+              <svg class="size-5" >
+                <use href="/assets/icons/eye.svg" id="useTag"></use>
+              </svg>
+            </button>
+          </div>
+        
+        <a href="" class="text-start w-full text-primary/80 hover:text-primary/100 text-sm"
           >¿Olvido su contraseña?</a>
         <button id="button">Ingresar</button>
       </form>
@@ -85,10 +78,27 @@ import Layout from "../../layouts/Layout.astro";
 </Layout>
 
 <script>
-  import {actions} from 'astro:actions';
+  import { actions } from 'astro:actions';
   import { navigate } from 'astro:transitions/client';
 
   const form = document.querySelector("form");
+
+  const passwordInput = document.getElementById("pass") as HTMLInputElement;
+  const toggleEye = document.getElementById("eye") as HTMLElement;
+  const useTag = document.getElementById("useTag") as HTMLElement;
+
+  toggleEye?.addEventListener("click", (e) => {
+    e.preventDefault()
+    const isPassword = passwordInput.type === "password";
+    passwordInput.type = isPassword ? "text" : "password";
+
+    if (isPassword) {
+      useTag.setAttribute("href", "/assets/icons/eyeclose.svg");
+    } else {
+      useTag.setAttribute("href", "/assets/icons/eye.svg");
+    }
+
+  } )
 
   form?.addEventListener("submit", async (event) => {
     event.preventDefault();

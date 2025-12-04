@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { login } from "../../../services/cognitoService";
+import { login } from "../../services/cognitoService";
 
 
 export const POST: APIRoute = async ({ request }) => {

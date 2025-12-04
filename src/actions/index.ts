@@ -2,58 +2,6 @@ import { defineAction } from "astro:actions";
 import { z } from "zod";
 
 export const server = {
-    register: defineAction({
-        accept: "form",
-        input: z.object({
-            email: z.string().email("Email no válido"),
-            password: z.string().min(6, "La contraseña debe tener al menos 8 caracteres"),
-            cPassword: z.string().min(6),
-        }).refine(data => data.password === data.cPassword, {
-            message: "Las contraseñas no coinciden",
-            path: ["cPassword"],
-        }),
-
-        async handler(input) {
-            try {
-                const API_BASE = import.meta.env.PUBLIC_API_URL_AUTH
-
-                const res = await fetch(`${API_BASE}register`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json",
-                    },
-                    body: JSON.stringify({
-                        email: input.email,
-                        password: input.password,
-                    }),
-                });
-
-                const data = await res.json();
-
-                if (!res.ok || data.ok === false) {
-                    throw { name: data.error || "RegisterError", message: data.message }
-                }
-
-                console.log({ ok: data.ok, message: data.message, detail: data.detail })
-
-                return { ok: true, message: data.message, username: data.username }
-
-            } catch (error: any) {
-
-                switch (error.name) {
-                    case "UsernameExistsException":
-                        return { ok: false, message: "El usuario ya existe.", error: error.name };
-
-                    case "InvalidPasswordException":
-                        return { ok: false, message: "Contraseña no permitida.", error: error.name };
-
-                    default:
-                        console.error("Error desconocido:", error);
-                }
-            }
-        }
-    }),
 
     login: defineAction({
         accept: "form",
@@ -111,6 +59,64 @@ export const server = {
 
                     default:
                         console.error("Error desconocido:", error);
+                }
+            }
+        }
+    }),
+
+    register: defineAction({
+        accept: "form",
+        input: z.object({
+            email: z.string().email("Email no válido"),
+            password: z.string().min(8, "La contraseña debe tener al menos 8 caracteres"),
+            cPassword: z.string().min(8),
+        }).refine(data => data.password === data.cPassword, {
+            message: "Las contraseñas no coinciden",
+            path: ["cPassword"],
+        }),
+
+        async handler(input) {
+            try {
+                const API_BASE = import.meta.env.PUBLIC_API_URL_AUTH;
+                const url = `${API_BASE}register`;
+
+                const res = await fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                    },
+                    body: JSON.stringify({
+                        email: input.email,
+                        password: input.password,
+                    }),
+                });
+
+                const data = await res.json();
+
+                if (!res.ok || data.ok === false) {
+                    throw { 
+                        name: data.error || "RegisterError", 
+                        message: data.message || "Error desconocido" 
+                    };
+                }
+
+                return { ok: true, message: data.message, username: data.username };
+
+            } catch (error: any) {
+
+                switch (error.name) {
+                    case "UsernameExistsException":
+                        return { ok: false, message: "El usuario ya existe.", error: error.name };
+
+                    case "InvalidPasswordException":
+                        return { ok: false, message: "Contraseña no permitida.", error: error.name };
+
+                    default:
+                        console.error("Error desconocido:", error);
+
+                        return { ok: false, message: error.message || "Error desconocido", error: error.name || "UnknownError"}
+
                 }
             }
         }
@@ -183,3 +189,5 @@ export const server = {
         }
     })
 }
+
+   

@@ -6,7 +6,7 @@ import CodeInput from "../../components/codeInput";
 <Layout title="Confirmar cuenta">
   <main class="w-full h-screen flex justify-center items-center bg-dark-back">
     <section
-      class="w-auto px-15 py-10 h-auto bg-back rounded-t-3xl rounded-b-4xl"
+      class="w-[90%] sm:w-auto px-15 py-10 sm:h-auto bg-back rounded-t-3xl rounded-b-4xl"
     >
       <div
         class="flex flex-col gap-5 w-full h-full justify-center items-center"
@@ -23,9 +23,10 @@ import CodeInput from "../../components/codeInput";
           Hemos enviado un código de 6 dígitos a tu correo electrónico
         </p>
 
-        <CodeInput></CodeInput>
-        <input type="hidden" name="username" id="username" />
-        <button id="button">Verificar Código</button>
+        <form class="space-y-5 w-[90%] flex flex-col justify-center items-center" id="ConfirmcodeForm">
+          <input type="text" class="no-spinner" placeholder="C O D E" maxlength="6"> 
+          <button type="submit" id="button">Verificar Código</button>
+        </form>
 
         <p class="text-secondary-text text-sm">¿No recibiste el código?</p>
         <button id="btt" class="text-primary/80 font-medium hover:text-primary text-sm"
@@ -48,3 +49,30 @@ import CodeInput from "../../components/codeInput";
     </section>
   </main>
 </Layout>
+
+<script>
+  import { actions } from "astro:actions";
+
+  const form = document.querySelector("form") as HTMLFormElement;
+  const params = new URLSearchParams(window.location.search);
+  const username = params.get("username");
+
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault()
+
+    const formData = new FormData(form);
+    if (username) {
+      formData.append("username", username);
+    }
+    const result = await actions.confirmCode(formData);
+
+    if (result.data?.ok) {
+      alert("Correo confirmado")
+    } else {
+      alert(result.error?.message)
+    }
+  })
+
+
+</script>
