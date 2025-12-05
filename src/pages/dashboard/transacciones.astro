@@ -1,5 +1,6 @@
 ---
 import DashboardLayout from "../../layouts/DashboardLayout.astro";
+import Maintransaction from "../../shared/components/maintransaction.astro";
 ---
 
 <DashboardLayout title="Transacciones">
@@ -10,5 +11,6 @@ import DashboardLayout from "../../layouts/DashboardLayout.astro";
       <img src="/assets/icons/plus.svg" alt="Icono boton de nueva transacción" class="size-4 sm:size-5 "> 
       <p class="text-sm font-extralight text-white">Nueva Transacción</p>
     </button>
+    <Maintransaction></Maintransaction>
   </div>
 </DashboardLayout>
