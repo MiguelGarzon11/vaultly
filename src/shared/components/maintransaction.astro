@@ -1,20 +1,36 @@
+---
+
+const transactions = [1,2,3];
+
+---
+
+
+
 <div class="w-full h-auto flex flex-col bg-white p-10 rounded-2xl ring-1 ring-secondary-text/10 gap-3">
     <h1 class="text-xl text-text font-medium">Historial de transacciones</h1>
     <p class="text-sm font-extralight">Todas tus transacciones recientes en un solo lugar</p>
     <div class="flex flex-col w-full h-auto overflow-y-auto">
-        <div class="w-full p-5 flex justify-around items-center">
-            <div class="flex items-center justify-between ring-1 ring-secondary-text/25 rounded-2xl px-5 py-3 gap-5 w-full">
-                <div class="flex justify-start items-center gap-5">
-                    <div class="size-10 bg-red-100 rounded-full flex justify-center items-center">
-                        <img src="/assets/icons/arrow-down.svg" alt="Icono de gasto" class="size-6 m-2">
-                    </div>
-                    <div class="flex flex-col">
-                        <p class="text-text font-medium">Compra en supermercado</p>
-                        <p class="text-secondary-text text-sm font-extralight">15 de junio, 2024</p>
-                    </div>
+
+        <div class="w-full flex flex-col justify-around items-center gap-1 px-1">
+            {transactions.map((tx) => (
+                <div>
+
                 </div>
-                <h1>$ 125.00</h1>
-            </div>
+                <div class="flex items-center justify-between ring-1 ring-secondary-text/25 rounded-2xl px-5 py-3 gap-5 w-full">
+                    <div class="flex justify-start items-center gap-5">
+                        <div class="size-10 bg-red-100 rounded-full flex justify-center items-center">
+                            <img src="/assets/icons/arrow-down.svg" alt="Icono de gasto" class="size-6 m-2">
+                        </div>
+                        <div class="flex flex-col">
+                            <p class="text-text font-medium">Compra en supermercado</p>
+                            <p class="text-secondary-text text-sm font-extralight">15 de junio, 2024</p>
+                        </div>
+                    </div>
+                    <h1>$ 125.00</h1>
+                </div>
+            ))}
+
+            
             
 
         </div>

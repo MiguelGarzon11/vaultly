@@ -13,18 +13,20 @@ const transactions = [
     <div class="size-full rounded-2xl p-10 bg-white flex flex-col justify-start space-y-2.5">
         <h1 class="text-lg font-medium text-text">Actividad Reciente</h1>
         <p class="text-sm font-extralight mb-5">Tus últimas transacciones</p>
-        <div class="space-y-3">
+        <div class="space-y-3 ">
             {transactions.slice(0, 5).map((tx) => (
-                <div class="flex justify-between items-start py-2 w-full space-x-5 gap-y-10">
-                    <img src="/assets/icons/wallet.svg" alt="Icono Transacción" class="size-6"> 
+                <Fragment>
+                    <div class="flex justify-between items-center py-2 w-full space-x-5 gap-y-10">
+                    <img src="/assets/icons/wallet.svg" alt="Icono Transacción" class="size-6" />
                     <div class="flex flex-col w-full">
                         <h1 class="text-sm">{tx.description}</h1>
                         <p class="text-[12px] font-extralight">{tx.date}</p>
                     </div>
                     <h1>${tx.amount}</h1>
-                </div>
-                <hr>
-            ))}
+                    </div>
+                    <hr />
+                </Fragment>
+                ))}
         </div>
     </div>
 </a>
