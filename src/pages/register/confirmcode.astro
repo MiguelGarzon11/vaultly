@@ -1,6 +1,5 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import CodeInput from "../../components/codeInput";
 ---
 
 <Layout title="Confirmar cuenta">
@@ -24,7 +23,7 @@ import CodeInput from "../../components/codeInput";
         </p>
 
         <form class="space-y-5 w-[90%] flex flex-col justify-center items-center" id="ConfirmcodeForm">
-          <input type="text" class="no-spinner" placeholder="C O D E" maxlength="6"> 
+          <input type="text" class="no-spinner" placeholder="C O D E" maxlength="6" id="code" name="code"> 
           <button type="submit" id="button">Verificar Código</button>
         </form>
 
@@ -52,14 +51,16 @@ import CodeInput from "../../components/codeInput";
 
 <script>
   import { actions } from "astro:actions";
+import { navigate } from "astro:transitions/client";
 
   const form = document.querySelector("form") as HTMLFormElement;
-  const params = new URLSearchParams(window.location.search);
-  const username = params.get("username");
+  const username = sessionStorage.getItem("email");
 
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault()
+
+    console.log("USERNAME", username)
 
     const formData = new FormData(form);
     if (username) {
@@ -69,6 +70,7 @@ import CodeInput from "../../components/codeInput";
 
     if (result.data?.ok) {
       alert("Correo confirmado")
+      navigate("/login")
     } else {
       alert(result.error?.message)
     }

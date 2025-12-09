@@ -113,6 +113,7 @@ import Layout from "../../layouts/Layout.astro";
 
 <script>
   import { actions } from "astro:actions";
+import { navigate } from "astro:transitions/client";
 
   const passwordInput = document.getElementById("pass") as HTMLInputElement;
   const toggleEye1 = document.getElementById("eye1") as HTMLElement;
@@ -153,10 +154,15 @@ import Layout from "../../layouts/Layout.astro";
     const formData = new FormData(form);
     const result = await actions.register(formData);
 
+    console.log(result)
+
     if (result.data?.ok === true) {
       setTimeout(() => {
         alert(result.data?.message)
-        window.location.href = `/register/confirmcode?username=${encodeURIComponent(result.data?.username!)}`;
+        if (result.data?.username) {
+          sessionStorage.setItem("email", result.data?.username)
+          navigate("/register/confirmcode")
+        }
       }, 500);
     } else {
       alert(result.data?.message)

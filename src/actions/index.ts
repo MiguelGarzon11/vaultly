@@ -101,7 +101,7 @@ export const server = {
                     };
                 }
 
-                return { ok: true, message: data.message, username: data.username };
+                return { ok: true, message: data.message, username: input.email };
 
             } catch (error: any) {
 
@@ -115,11 +115,11 @@ export const server = {
                     default:
                         console.error("Error desconocido:", error);
 
-                        return { ok: false, message: error.message || "Error desconocido", error: error.name || "UnknownError"}
+                        return { ok: false, message: error.message || "Error desconocido", error: error.name || "UnknownError", username: input.email}
 
                 }
             }
-        }
+        } 
     }),
 
     confirmCode: defineAction({
