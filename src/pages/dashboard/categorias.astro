@@ -1,14 +1,42 @@
 ---
 import DashboardLayout from "../../layouts/DashboardLayout.astro";
+import Maincategory from "../../shared/components/maincategory.astro";
+import Modalcategory from "../../shared/components/modalcategory.tsx";
+
+const categorias: any[] | null = []
+
+const isNewCategory = false;
+function toggleIsNewCategory() {
+  isNewCategory!
+}
 ---
 
 <DashboardLayout>
   <div class="flex flex-col gap-2 sm:gap-3 w-full relative">
     <h1 class="text-xl md:text-2xl text-text font-medium">Categorías</h1>
     <p class="text-sm md:text-lg text-text font-extralight">Organiza tus gastos por categorías</p>
-    <button class="absolute right-0 bg-primary px-5 py-3 rounded-2xl flex justify-between gap-3 active:scale-95 hover:bg-primary/80">
+    <button class="absolute right-0 bg-primary px-3 sm:px-5 py-3 rounded-full sm:rounded-2xl flex justify-between gap-3 active:scale-95 hover:bg-primary/80">
       <img src="/assets/icons/plus.svg" alt="Icono boton de nueva transacción" class="size-4 sm:size-5 "> 
-      <p class="text-sm font-extralight text-white">Nueva Categoría</p>
+      <p class="hidden sm:flex text-sm font-extralight text-white">Nueva Categoría</p>
     </button>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-rows-auto w-full max-h-[500px] sm:max-h-[750px] mt-5 overflow-y-auto gap-3 py-3 mask-t-from-95% sm:mask-b-from-100% sm:mask-t-from-100% px-1 mask-b-from-95%">
+      {categorias.length <= 0 && (
+        <div class="flex w-full col-span-3 justify-center items-center">
+          <img src="/assets/img/notcategories.webp" alt="Icono No existen categorias" class="size-55 sm:size-65 opacity-75"/>
+        </div>
+      )}
+      {categorias.map((cx) => (
+        <Maincategory Icono="presup" Amount_max="500" Expense="250" Count_trans="15" Title="Alimentación"></Maincategory>
+      ))}
+    </div>
   </div>
 </DashboardLayout>
+
+{isNewCategory && (
+  <div id="modal" class="fixed inset-0 backdrop-blur-xs size-full bg-white/20 flex justify-center items-center">
+    <Modalcategory></Modalcategory>
+  </div>
+)}
+
+
+

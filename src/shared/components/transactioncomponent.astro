@@ -1,0 +1,19 @@
+---
+const {Title, Type, Date, Amount } = Astro.props
+---
+
+
+<div class="w-full h-full">
+    <div class="flex items-center justify-between ring-1 ring-secondary-text/25 rounded-2xl px-5 py-3 gap-2 sm:gap-5 w-full">
+        <div class="flex justify-start items-center gap-5">
+            <div class="size-10 sm:size-10 bg-red-100 rounded-full flex justify-center items-center">
+                <img src="/assets/icons/arrow-down.svg" alt="Icono de gasto" class="size-7 m-2" />
+            </div>
+            <div class="flex flex-col">
+                <p class="text-text font-medium text-sm">Compra en supermercado</p>
+                <p class="text-secondary-text text-sm font-extralight">15 de junio, 2024</p>
+            </div>
+        </div>
+        <h1 class="text-sm text-red-700">$125.00</h1>
+    </div>
+</div>

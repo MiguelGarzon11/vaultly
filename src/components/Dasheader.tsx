@@ -14,7 +14,7 @@ export default function Dasheader({ isOpen, toggleSidebar }: Props) {
       >
         <img src="/assets/icons/panel.svg" alt="icono panel" id="dIcon" />
       </button>
-      <div className="flex flex-row items-center justify-center gap-2">
+      <div className="flex flex-row items-center justify-center gap-2 z-50">
         <img
           src="/assets/icons/icon.svg"
           alt="icono usuario"

@@ -8,7 +8,7 @@ const balance = null;
 ---
 
 <DashboardLayout title="Dashboard">
-  <div class="flex flex-col gap-3 sm:gap-5">
+  <div class="flex flex-col gap-5">
     <h1 class="text-text text-2xl font-medium">Dashboard</h1>
     <p class="text-secondary-text text-lg font-extralight">
       Bienvenido a tu panel de control financiero
@@ -17,8 +17,6 @@ const balance = null;
       <Card
         titulo="Balance total"
         icono="wallet"
-        value={balance}
-        subvalor="+12.5% vs mes anterior"
       />
       <Card titulo="Ingresos del mes" 
         icono="arrow-top"
@@ -31,12 +29,11 @@ const balance = null;
       />
       
     </div>
-    <div class="w-full h-full grid sm:grid-cols-2 grid-rows-2 sm:grid-rows-1 justify-start items-start col-span-4 row-span-1 gap-5">
+    <div class="w-full h-full grid grid-cols-1 sm:grid-cols-2 grid-rows-2 sm:grid-rows-1 justify-start items-start col-span-4 row-span-1 gap-5">
         <Transactionscard class="row-span-1 col-span-1"></Transactionscard>
         <Presupuestocard class="row-span-1 col-span-1"></Presupuestocard>
     </div>
   </div>
-  
 
 </DashboardLayout>
 

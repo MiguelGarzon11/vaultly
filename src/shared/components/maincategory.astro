@@ -1,0 +1,22 @@
+---
+const { Icono, Color, Title, Expense, Amount_max, Count_trans } = Astro.props
+
+const percentage = (Expense / Amount_max) * 100
+--- 
+
+<div class="p-5 sm:p-7 bg-white rounded-2xl ring-1 ring-secondary-text/15 w-full h-auto space-y-4">
+    <div class="flex gap-3 justify-start items-center">
+        <div class="size-7 md:size-10 bg-purple-500 rounded-lg flex justify-center items-center">
+            <img src=`/assets/icons/${Icono}.svg` alt="Icono categoria" class="size-4 sm:size-6">
+        </div>
+        <h1 class="text-sm font-medium text-text">{Title}</h1>
+    </div>
+    <p class="text-text text-[12px] font-extralight mt-2">{Count_trans} transacciones este mes</p>
+    <div class="w-full flex justify-between items-center mt-5">
+        <p class="text-text text-sm">Total gastado</p>
+        <h1 class="text-[17px] font-medium space-x-1">${Expense}</h1>
+    </div>
+    <div class="w-full rounded-lg bg-dark-back h-1.5">
+        <div class="h-full bg-purple-500 rounded-lg" style={`width: ${percentage}%`}></div>
+    </div>
+</div>

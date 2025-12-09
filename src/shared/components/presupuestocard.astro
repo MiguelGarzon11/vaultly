@@ -1,9 +1,9 @@
 ---
-const categorias = [
-    { name: "Alimentación", amount_max: 500, expense: 300 },
-    { name: "Transporte", amount_max: 700, expense: 400},
-    { name: "Entretenimiendo", amount_max: 900, expense: 500},
-    { name: "Servicios", amount_max: 1100, expense: 100}
+const categorias: any[] | null = [
+    // { name: "Alimentación", amount_max: 500, expense: 300 },
+    // { name: "Transporte", amount_max: 700, expense: 400},
+    // { name: "Entretenimiendo", amount_max: 900, expense: 500},
+    // { name: "Servicios", amount_max: 1100, expense: 100}
 ]
 
 const categoriasConPorcentaje = categorias.map(c => ({
@@ -23,18 +23,26 @@ const categoriasConPorcentaje = categorias.map(c => ({
                 <p class="text-sm font-extralight mb-5">Estado de tus presupuestos</p>
             </div>
             <div class="space-y-3">
+                {categorias.length <= 0 && (
+                    <div class="flex w-full justify-center items-center">
+                    <button class="bg-secondary px-4 py-3 flex justify-between items-center rounded-2xl gap-2 hover:scale-105">
+                        <img src="/assets/icons/plus.svg" alt="Icono boton de nueva transacción" class="size-5"/> 
+                        <p class="text-white text-sm">Nueva Categoria</p>
+                    </button>
+                </div>
+                )}
                 {categoriasConPorcentaje.slice(0, 5).map((cx) => (
                     <div class="flex flex-col space-y-2"> 
                         <div class="flex justify-between">
                             <h1 class="text-sm text-text">{cx.name}</h1>
                             <div class="flex space-x-2">
-                                <p class="text-secondary-text text-sm font-extralight">${cx.expense}</p>
+                                <p class="text-secondary-text text-sm ">${cx.expense}</p>
                                 <p class="text-secondary-text text-sm font-extralight">/</p>
-                                <p class="text-secondary-text text-sm font-extralight">${cx.amount_max}</p>
+                                <p class="text-secondary-text text-sm ">${cx.amount_max}</p>
                             </div>
                         </div>
-                        <div class="w-full h-4 rounded-lg ring-1 ring-primary bg-transparent flex justify-start items-center p-0.5">
-                            <div class="bg-primary h-full rounded-lg" style={`width: ${cx.percentage}%`}></div>
+                        <div class="w-full h-4 rounded-lg bg-dark-back flex justify-start items-center overflow-hidden">
+                            <div class="bg-primary h-full rounded-2xl" style={`width: ${cx.percentage}%`}></div>
                         </div>
                     </div>
                 ))}

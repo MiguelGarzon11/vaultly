@@ -1,10 +1,9 @@
 ---
-import { date } from "astro:schema";
 
-const transactions = [
-  { description: "Compra en Supermercado", amount: "5000", date: "2024-06-10" },
-  { description: "Pago de Nómina", amount: "200000", date: "2024-06-09" },
-  { description: "Suscripción a Streaming", amount: "1500", date: "2024-06-08" },
+const transactions: any[] | null = [
+//   { description: "Compra en Supermercado", amount: "5000", date: "2024-06-10" },
+//   { description: "Pago de Nómina", amount: "200000", date: "2024-06-09" },
+//   { description: "Suscripción a Streaming", amount: "1500", date: "2024-06-08" },
 ];
 ---
 
@@ -13,7 +12,15 @@ const transactions = [
     <div class="size-full rounded-2xl p-10 bg-white flex flex-col justify-start space-y-2.5">
         <h1 class="text-lg font-medium text-text">Actividad Reciente</h1>
         <p class="text-sm font-extralight mb-5">Tus últimas transacciones</p>
-        <div class="space-y-3 ">
+        <div class="space-y-3">
+            {transactions.length <= 0 && (
+                <div class="flex w-full justify-center items-center">
+                    <button class="bg-primary px-3 py-3 flex justify-between items-center rounded-2xl gap-2 hover:scale-105">
+                        <img src="/assets/icons/plus.svg" alt="Icono boton de nueva transacción" class="size-5"/> 
+                        <p class="text-white text-sm">Nueva transacción</p>
+                    </button>
+                </div>
+            )}
             {transactions.slice(0, 5).map((tx) => (
                 <Fragment key={tx}>
                     <div class="flex justify-between items-center py-2 w-full space-x-5 gap-y-10">
@@ -22,7 +29,7 @@ const transactions = [
                         <h1 class="text-sm">{tx.description}</h1>
                         <p class="text-[12px] font-extralight">{tx.date}</p>
                     </div>
-                    <h1>${tx.amount}</h1>
+                    <h1 class="text-sm">${tx.amount}</h1>
                     </div>
                     <hr />
                 </Fragment>

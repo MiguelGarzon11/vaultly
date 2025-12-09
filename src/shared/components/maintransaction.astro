@@ -1,6 +1,8 @@
 ---
+import Transactioncomponent from "./transactioncomponent.astro";
 
-const transactions = [1,2,3,4,5,6,7,8,8,9,9];
+
+const transactions: any[] | null = [];
 
 ---
 
@@ -11,22 +13,14 @@ const transactions = [1,2,3,4,5,6,7,8,8,9,9];
     <p class="text-sm font-extralight px-2 sm:px-0">Todas tus transacciones recientes en un solo lugar</p>
     <div class="flex flex-col w-full h-auto overflow-y-auto">
 
-        <div class="w-full flex flex-col justify-around items-center gap-2 p-2 h-auto overflow-y-scroll py-5 mask-b-from-95% mask-t-from-95%">
-            {transactions.map(tx => (
-                <div class="w-full h-full">
-                    <div class="flex items-center justify-between ring-1 ring-secondary-text/25 rounded-2xl px-5 py-3 gap-2 sm:gap-5 w-full">
-                        <div class="flex justify-start items-center gap-5">
-                            <div class="size-10 sm:size-10 bg-red-100 rounded-full flex justify-center items-center">
-                                <img src="/assets/icons/arrow-down.svg" alt="Icono de gasto" class="size-7 m-2" />
-                            </div>
-                            <div class="flex flex-col">
-                                <p class="text-text font-medium text-sm">Compra en supermercado</p>
-                                <p class="text-secondary-text text-sm font-extralight">15 de junio, 2024</p>
-                            </div>
-                        </div>
-                        <h1 class="text-sm text-red-700">$125.00</h1>
-                    </div>
+        <div class="w-full flex flex-col justify-around items-center gap-2 p-2 h-auto overflow-y-auto py-5 mask-b-from-95% mask-t-from-95%">
+            {transactions.length <= 0 && (
+                <div class="w-full flex justify-center items-center h-auto">
+                    <img src="/assets/img/notransactions.webp" alt="Icono no transacciones" class="size-55 sm:size-65 opacity-75"/>
                 </div>
+            )}
+            {transactions.map(tx => (
+                <Transactioncomponent></Transactioncomponent>
             ))}
         </div>
     </div>

@@ -20,6 +20,10 @@
   box-shadow: -3px 5px 0 0 var(--color-dark-back);
 }
 
+body {
+  @apply z-0;
+}
+
 hr {
   @apply mask-l-from-1 mask-r-from-1;
 }
