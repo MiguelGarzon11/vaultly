@@ -2,7 +2,12 @@
 import Transactioncomponent from "./transactioncomponent.astro";
 
 
-const transactions: any[] | null = [];
+const transactions: any[] | null = [
+    // { description: "Compra en Supermercado", amount: "5000", date: "2024-06-10", type: "expense"},
+    // { description: "Pago de Nómina", amount: "200000", date: "2024-06-09", type: "income"},
+    // { description: "Suscripción a Streaming", amount: "1500", date: "2024-06-08", type: "expense" },
+    // { description: "Suscripción a Streaming", amount: "1500", date: "2024-06-08", type: "expense" }
+];
 
 ---
 
@@ -15,12 +20,20 @@ const transactions: any[] | null = [];
 
         <div class="w-full flex flex-col justify-around items-center gap-2 p-2 h-auto overflow-y-auto py-5 mask-b-from-95% mask-t-from-95%">
             {transactions.length <= 0 && (
-                <div class="w-full flex justify-center items-center h-auto">
-                    <img src="/assets/img/notransactions.webp" alt="Icono no transacciones" class="size-55 sm:size-65 opacity-75"/>
+                <div class="w-full flex flex-col justify-center items-center h-auto gap-2">
+                    <div class="p-3 bg-secondary/15 rounded-2xl">
+                        <img src="/assets/icons/transacblue.svg" alt="Icono de frase No tiene categorias creadas" class="size-10"/>
+                    </div>
+                    <h1 class="text-text font-medium text-lg">No hay transacciones registradas</h1>
+                    <p class="text-center w-[90%] font-extralight text-secondary-text text-[16px]">Añade tu primera transacción y empieza a monitorear tus ingresos y gastos fácilmente.</p>
+                    <button class="bg-primary px-3 sm:px-5 py-3 rounded-full sm:rounded-2xl flex justify-between gap-3 active:scale-95 hover:bg-primary/80 mt-5">
+                        <img src="/assets/icons/plus.svg" alt="Icono boton de nueva transacción" class="size-4 sm:size-5" /> 
+                        <p class="flex text-sm font-extralight text-white">Nueva Transacción</p>
+                    </button>
                 </div>
             )}
             {transactions.map(tx => (
-                <Transactioncomponent></Transactioncomponent>
+                <Transactioncomponent Title={tx.description} Type={tx.type} Date={tx.date} Amount={tx.amount}></Transactioncomponent>
             ))}
         </div>
     </div>

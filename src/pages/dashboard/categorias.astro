@@ -15,16 +15,30 @@ function toggleIsNewCategory() {
   <div class="flex flex-col gap-2 sm:gap-3 w-full relative">
     <h1 class="text-xl md:text-2xl text-text font-medium">Categorías</h1>
     <p class="text-sm md:text-lg text-text font-extralight">Organiza tus gastos por categorías</p>
-    <button class="absolute right-0 bg-primary px-3 sm:px-5 py-3 rounded-full sm:rounded-2xl flex justify-between gap-3 active:scale-95 hover:bg-primary/80">
-      <img src="/assets/icons/plus.svg" alt="Icono boton de nueva transacción" class="size-4 sm:size-5 "> 
-      <p class="hidden sm:flex text-sm font-extralight text-white">Nueva Categoría</p>
-    </button>
+
+    {categorias.length > 0 && (
+      <button class="absolute right-0 bg-primary px-3 sm:px-5 py-3 rounded-full sm:rounded-2xl flex justify-between gap-3 active:scale-95 hover:bg-primary/80">
+        <img src="/assets/icons/plus.svg" alt="Icono boton de nueva transacción" class="size-4 sm:size-5" /> 
+        <p class="hidden sm:flex text-sm font-extralight text-white">Nueva Categoría</p>
+      </button>
+    )}
+
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-rows-auto w-full max-h-[500px] sm:max-h-[750px] mt-5 overflow-y-auto gap-3 py-3 mask-t-from-95% sm:mask-b-from-100% sm:mask-t-from-100% px-1 mask-b-from-95%">
+
       {categorias.length <= 0 && (
-        <div class="flex w-full col-span-3 justify-center items-center">
-          <img src="/assets/img/notcategories.webp" alt="Icono No existen categorias" class="size-55 sm:size-65 opacity-75"/>
+        <div class="flex flex-col w-full col-span-3 justify-center items-center gap-2 mt-10">
+          <div class="p-3 bg-secondary/15 rounded-2xl">
+            <img src="/assets/icons/categblue.svg" alt="Icono de frase No tiene categorias creadas" class="size-10"/>
+            </div>
+            <h1 class="text-text font-medium text-lg">No hay categorías aún</h1>
+            <p class="text-center w-[90%] font-extralight text-secondary-text text-[16px]">Crea tu primera categoría para empezar a organizar tus gastos y mantener el control de tu presupuesto.</p>
+            <button class="bg-primary px-3 sm:px-5 py-3 rounded-full sm:rounded-2xl flex justify-between gap-3 active:scale-95 hover:bg-primary/80 mt-5">
+              <img src="/assets/icons/plus.svg" alt="Icono boton de nueva transacción" class="size-4 sm:size-5" /> 
+              <p class="flex text-sm font-extralight text-white">Nueva Categoría</p>
+            </button>
         </div>
       )}
+
       {categorias.map((cx) => (
         <Maincategory Icono="presup" Amount_max="500" Expense="250" Count_trans="15" Title="Alimentación"></Maincategory>
       ))}
