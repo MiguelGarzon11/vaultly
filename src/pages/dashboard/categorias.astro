@@ -1,11 +1,9 @@
 ---
 import DashboardLayout from "../../layouts/DashboardLayout.astro";
 import Maincategory from "../../shared/components/maincategory.astro";
-import Modalcategory from "../../shared/components/modalcategory.tsx";
+import CreateCategoryWrapper from "../../components/CreateCategoryWrapper"
 
 const categorias: any[] | null = []
-
-const isNewCategory = true;
 
 ---
 
@@ -24,17 +22,7 @@ const isNewCategory = true;
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-rows-auto w-full max-h-[500px] sm:max-h-[750px] mt-5 overflow-y-auto gap-3 py-3 mask-t-from-95% sm:mask-b-from-100% sm:mask-t-from-100% px-1 mask-b-from-95%">
 
       {categorias.length <= 0 && (
-        <div class="flex flex-col w-full col-span-3 justify-center items-center gap-2 mt-10">
-          <div class="p-3 bg-secondary/15 rounded-2xl">
-            <img src="/assets/icons/categblue.svg" alt="Icono de frase No tiene categorias creadas" class="size-10"/>
-            </div>
-            <h1 class="text-text font-medium text-lg">No hay categorías aún</h1>
-            <p class="text-center w-[90%] font-extralight text-secondary-text text-[16px]">Crea tu primera categoría para empezar a organizar tus gastos y mantener el control de tu presupuesto.</p>
-            <button class="bg-primary px-3 sm:px-5 py-3 rounded-full sm:rounded-2xl flex justify-between gap-3 active:scale-95 hover:bg-primary/80 mt-5" id="buttonNewCategory">
-              <img src="/assets/icons/plus.svg" alt="Icono boton de nueva transacción" class="size-4 sm:size-5" /> 
-              <p class="flex text-sm font-extralight text-white">Nueva Categoría</p>
-            </button>
-        </div>
+        <CreateCategoryWrapper client:only="react"></CreateCategoryWrapper>
       )}
 
       {categorias.map((cx) => (
@@ -43,38 +31,3 @@ const isNewCategory = true;
     </div>
   </div>
 </DashboardLayout>
-
-{isNewCategory && (
-  <div id="backmodal" class="hidden fixed inset-0 backdrop-blur-xs size-full bg-white/20 justify-center items-center">
-    <Modalcategory></Modalcategory>
-  </div>
-)}
-
-<script>
-
-  const backModal = document.getElementById("backmodal")
-  const buttonNewCategory = document.getElementById("buttonNewCategory")
-  const modal = document.getElementById("modal");
-
-  function openModal() {
-    backModal?.classList.remove("hidden");
-    backModal?.classList.add("flex");
-    console.log("Se abrio el modal")
-  }
-
-  function closeModal() {
-    backModal?.classList.remove("flex");
-    backModal?.classList.add("hidden");
-    console.log("Se cerro el modal")
-  }
-
-  backModal?.addEventListener("click", (e) => {
-    if (e.target === backModal) {
-      closeModal();
-    }
-  });
-
-  buttonNewCategory?.addEventListener("click", openModal)
-
-</script>
-

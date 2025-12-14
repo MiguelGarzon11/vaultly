@@ -12,7 +12,7 @@ export default function SideBar({ isOpen }: Props) {
         "hidden inset-0 h-[100%] bg-primary sm:flex flex-col caret-transparent transition-all duration-200",
         isOpen
           ? "w-[70%] sm:w-[40%] md:w-[35%] lg:w-[22%] rounded-r-4xl py-6 sm:py-10 px-6 sm:px-8"
-          : "w-[10%] sm:w-[8%] md:w-[4%] lg:w-[5%] rounded-r-2xl sm:py-3 sm:p-1 md:py-5 lg:py-5 justify-center"
+          : "w-[10%] sm:w-[9%] md:w-[5%] lg:w-[6%] rounded-r-2xl sm:py-5 md:py-5 lg:py-5 justify-center"
       )}
     >
       <div className="w-full h-auto flex flex-row sm:gap-5 md:gap-5 mb-4 items-center justify-center px-3">
@@ -23,7 +23,7 @@ export default function SideBar({ isOpen }: Props) {
             "transition-all duration-200",
             isOpen
               ? "size-10 sm:size-12"
-              : "size-8"
+              : "size-7"
           )}
         />
         {isOpen && (
