@@ -68,7 +68,7 @@ export default function CreateCategoryModal({isOpen, onOpenChange
                       </div>
                       <div className="flex flex-col justify-start items-start">
                           <p className="text-white font-extralight text-sm">Vista previa</p>
-                          <h1 className="text-white text-lg font-medium">{title}</h1>
+                          <h1 className="text-white text-lg font-medium">{title || "Nueva Categoría"}</h1>
                       </div>
                     </div>
                   </section>
@@ -86,7 +86,7 @@ export default function CreateCategoryModal({isOpen, onOpenChange
                   {/* Nombre de la categoría */}
                     <div className="flex flex-col space-y-2">
                       <label htmlFor="title" className="text-text text-sm font-medium">Nombre de la categoría</label>
-                      <input type="text" name="title" id="titleCategory" className="h-8 w-full bg-dark-back rounded-lg px-2 text-sm text-text font-light" placeholder="Ej: Supermercado, Entretenimiento, Gym..."/>
+                      <input type="text" name="title" id="titleCategory" onChange={(t) => {setTitle(t.target.value) }} className="h-8 w-full bg-dark-back rounded-lg px-2 text-sm text-text font-light" placeholder="Ej: Supermercado, Entretenimiento, Gym..."/>
                     </div>
                   {/* Monto máximo */}
                     <div className="flex flex-col space-y-2 relative">
